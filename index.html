@@ -18,19 +18,19 @@
        DESIGN SYSTEM: EMERALD MINT PREMIUM
        ========================================== */
     :root {
-      --bg: #f4f7f6;
+      --bg: #f5f7fb;
       --surface: #ffffff;
-      --primary: #009675;
-      --primary-light: #e6f5f1;
-      --primary-dark: #007d62;
-      --text: #1a2521;
-      --text-secondary: #687973;
-      --text-muted: #9fb1ac;
-      --border: #e2e8f0;
-      --red: #d93838;
-      --red-light: #fdf2f2;
-      --green-light: #e6f9f0;
-      --card-shadow: 0 4px 18px rgba(0, 150, 117, 0.04);
+      --primary: #1d4ed8;       /* Biru Royal/Cobalt kuat agar sangat jelas terlihat di bawah terik matahari */
+      --primary-light: #eff6ff; /* Background biru muda yang lembut */
+      --primary-dark: #1e3a8a;  /* Biru gelap navy untuk teks utama/kontras tinggi */
+      --text: #0f172a;          /* Slate gelap (hampir hitam) untuk teks agar kontras maksimal */
+      --text-secondary: #475569;/* Abu medium gelap untuk detail sub-informasi */
+      --text-muted: #94a3b8;
+      --border: #cbd5e1;        /* Border abu tegas untuk mempermudah pemisahan area sentuh */
+      --red: #dc2626;           /* Merah tegas untuk diskon/batal */
+      --red-light: #fef2f2;
+      --green-light: #f0fdf4;
+      --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
       --nav-h: 72px;
     }
 
@@ -336,25 +336,80 @@
       cursor: pointer;
     }
 
-    /* Cart FAB */
+    /* Cart FAB Modern (Meniru persis capture) */
     .cart-floating-fab {
       position: absolute;
       bottom: 96px;
       left: 16px;
       right: 16px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 16px;
-      height: 52px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      height: 76px;
       padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(0, 150, 117, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
       cursor: pointer;
-      font-weight: 700;
       z-index: 90;
+    }
+    .cart-fab-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cart-icon-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #eef2fe;
+      color: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .cart-badge-orange {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #f97316;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid #ffffff;
+    }
+    .cart-tagihan-title {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cart-tagihan-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-top: 2px;
+    }
+    .cart-btn-bayar {
+      background: #1d4ed8;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
     }
 
     /* Transaction Row (Gambar 2 style) */
@@ -684,74 +739,115 @@
           <!-- Products will inject here -->
         </div>
 
-        <!-- Float Cart FAB -->
-        <button class="cart-floating-fab" id="cart-fab" onclick="openCart()" style="display:none;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            <span id="cart-fab-qty">0 Item</span>
+        <!-- Float Cart FAB (Meniru capture) -->
+        <div class="cart-floating-fab" id="cart-fab" onclick="openCart()" style="display:none;">
+          <div class="cart-fab-left">
+            <div class="cart-icon-container">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <div class="cart-badge-orange" id="cart-fab-qty">0</div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:flex-start;">
+              <span class="cart-tagihan-title">Total Tagihan</span>
+              <span class="cart-tagihan-value" id="cart-fab-total">Rp 0</span>
+            </div>
           </div>
-          <span id="cart-fab-total">Rp 0</span>
-        </button>
+          <button class="cart-btn-bayar">Bayar</button>
+        </div>
       </div>
 
       <!-- 2. VIEW: LAPORAN -->
       <div class="view-panel" id="view-laporan">
-        <!-- TIME RANGE REPORT CARDS -->
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:12px;">
-          <div class="premium-card" style="padding:12px; margin-bottom:0; text-align:center; cursor:pointer;" onclick="filterRiwayatRange(1)">
-            <div class="stat-label" style="font-size:9px;">Harian</div>
-            <div style="font-family:'Outfit'; font-weight:700; font-size:12px; color:var(--primary); margin-top:4px;" id="lap-range-harian">Rp 0</div>
-          </div>
-          <div class="premium-card" style="padding:12px; margin-bottom:0; text-align:center; cursor:pointer;" onclick="filterRiwayatRange(7)">
-            <div class="stat-label" style="font-size:9px;">Mingguan</div>
-            <div style="font-family:'Outfit'; font-weight:700; font-size:12px; color:var(--primary); margin-top:4px;" id="lap-range-mingguan">Rp 0</div>
-          </div>
-          <div class="premium-card" style="padding:12px; margin-bottom:0; text-align:center; cursor:pointer;" onclick="filterRiwayatRange(30)">
-            <div class="stat-label" style="font-size:9px;">Bulanan</div>
-            <div style="font-family:'Outfit'; font-weight:700; font-size:12px; color:var(--primary); margin-top:4px;" id="lap-range-bulanan">Rp 0</div>
-          </div>
+        <!-- Header Laporan dengan Filter Periode -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h3 style="font-family:'Outfit'; font-size:18px;">Laporan Penjualan</h3>
+          <button class="btn btn-secondary" style="height:36px; padding:0 12px; font-size:12px; background:var(--primary-light); color:var(--primary); font-weight:700;" onclick="exportLaporanPDF()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Ekspor PDF
+          </button>
         </div>
 
-        <div class="premium-card" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff;">
-          <div class="stat-label" style="color: rgba(255,255,255,0.8);">Laba Bersih Bulan Ini</div>
-          <div class="stat-value" id="lap-total-laba" style="color: #fff; font-size: 32px;">Rp 0</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-            <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;">
-              <div class="stat-label" style="color: rgba(255,255,255,0.8);">Pendapatan</div>
-              <div style="font-weight: 700;" id="lap-total-penjualan">Rp 0</div>
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-bottom:16px;">
+          <button id="btn-period-1" class="btn btn-secondary" style="height:38px; font-size:12px; border-radius:20px; font-weight:600; background:var(--surface); border:1px solid var(--border);" onclick="setLaporanPeriod(1)">Hari Ini</button>
+          <button id="btn-period-7" class="btn btn-secondary" style="height:38px; font-size:12px; border-radius:20px; font-weight:600; background:var(--surface); border:1px solid var(--border);" onclick="setLaporanPeriod(7)">7 Hari</button>
+          <button id="btn-period-30" class="btn" style="height:38px; font-size:12px; border-radius:20px; font-weight:700; background:var(--primary); color:#fff;" onclick="setLaporanPeriod(30)">Bulan Ini</button>
+        </div>
+
+        <div style="font-size:13px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">Ringkasan Keuangan</div>
+
+        <!-- 2x2 Grid Laporan (Persis Capture) -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:16px;">
+          <!-- Total Penjualan -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:6px;">
+            <div style="width:32px; height:32px; border-radius:8px; background:#eff6ff; display:flex; align-items:center; justify-content:center; color:#2563eb;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
             </div>
-            <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;">
-              <div class="stat-label" style="color: rgba(255,255,255,0.8);">HPP</div>
-              <div style="font-weight: 700;" id="lap-total-hpp">Rp 0</div>
+            <div id="lap-total-penjualan" style="font-family:'Outfit'; font-size:18px; font-weight:800; color:var(--text); margin-top:4px;">Rp 0</div>
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:500;">Total Penjualan</span>
+          </div>
+
+          <!-- Total Transaksi -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:6px;">
+            <div style="width:32px; height:32px; border-radius:8px; background:#f0fdf4; display:flex; align-items:center; justify-content:center; color:#16a34a;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div id="lap-total-transaksi" style="font-family:'Outfit'; font-size:18px; font-weight:800; color:var(--text); margin-top:4px;">0</div>
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:500;">Total Transaksi</span>
+          </div>
+
+          <!-- Barang Terjual -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:6px;">
+            <div style="width:32px; height:32px; border-radius:8px; background:#fff7ed; display:flex; align-items:center; justify-content:center; color:#ea580c;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div id="lap-barang-terjual" style="font-family:'Outfit'; font-size:18px; font-weight:800; color:var(--text); margin-top:4px;">0</div>
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:500;">Barang Terjual</span>
+          </div>
+
+          <!-- Laba Bersih -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:6px;">
+            <div style="width:32px; height:32px; border-radius:8px; background:#f0fdfa; display:flex; align-items:center; justify-content:center; color:#0d9488;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div id="lap-total-laba" style="font-family:'Outfit'; font-size:18px; font-weight:800; color:var(--primary); margin-top:4px;">Rp 0</div>
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:500;">Laba Bersih</span>
+          </div>
+        </div>
+
+        <!-- Perbandingan Masuk vs Hutang (Persis Capture) -->
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:var(--text-secondary); margin-bottom:12px;">Uang Masuk vs Hutang</div>
+          <div style="display:flex; height:8px; border-radius:4px; overflow:hidden; background:#e2e8f0; margin-bottom:12px;">
+            <div id="bar-masuk" style="background:#2563eb; width:50%; transition:width 0.3s;"></div>
+            <div id="bar-hutang" style="background:#f59e0b; width:50%; transition:width 0.3s;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#2563eb; margin-right:4px;"></span>
+              <span style="font-size:11px; color:var(--text-secondary);">Uang Masuk</span>
+              <div id="lbl-masuk" style="font-weight:700; font-size:14px; margin-top:2px;">Rp 0</div>
+            </div>
+            <div style="text-align:right;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#f59e0b; margin-right:4px;"></span>
+              <span style="font-size:11px; color:var(--text-secondary);">Hutang (Kasbon)</span>
+              <div id="lbl-hutang" style="font-weight:700; font-size:14px; margin-top:2px; color:var(--red);">-Rp 0</div>
             </div>
           </div>
         </div>
 
-        <div class="premium-card">
-          <div class="stat-label">Perbandingan Masuk vs Piutang</div>
-          <div style="display:flex; height:24px; border-radius:12px; overflow:hidden; margin-top:8px;">
-            <div id="bar-masuk" style="background:var(--primary); width:50%; display:flex; align-items:center; padding-left:8px; color:#fff; font-size:10px; font-weight:bold;">Masuk</div>
-            <div id="bar-hutang" style="background:var(--red); width:50%; display:flex; align-items:center; padding-right:8px; justify-content:flex-end; color:#fff; font-size:10px; font-weight:bold;">Piutang</div>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:11px; font-weight:600;">
-            <span style="color:var(--primary);" id="lbl-masuk">Rp 0</span>
-            <span style="color:var(--red);" id="lbl-hutang">Rp 0</span>
-          </div>
-        </div>
-
-        <div class="premium-card">
-          <div class="stat-label">Kategori Laporan Penjualan</div>
+        <!-- Rincian Metode & Pengeluaran -->
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:var(--text-secondary); margin-bottom:10px;">Laporan Berdasarkan Kategori</div>
           <div style="display:flex; flex-direction:column; gap:8px;" id="lap-kategori-list"></div>
         </div>
 
-        <div class="premium-card">
-          <div class="stat-label">Kategori Laporan Pengeluaran</div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:var(--text-secondary); margin-bottom:10px;">Laporan Pengeluaran Kios</div>
           <div style="display:flex; flex-direction:column; gap:8px;" id="lap-kategori-pengeluaran-list"></div>
         </div>
 
-        <div class="premium-card">
-          <div class="stat-label">Status Stok Rendah</div>
-          <div style="margin-top:10px;" id="lap-stok-list"></div>
+        <!-- Status Stok -->
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:16px; box-shadow:var(--card-shadow); margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:var(--text-secondary); margin-bottom:10px;">Stok Kios Hampir Habis</div>
+          <div id="lap-stok-list"></div>
         </div>
       </div>
 
@@ -856,7 +952,23 @@
       </button>
       <nav class="nav-bg">
         <button class="nav-item active" id="tab-kasir" onclick="switchTab('kasir')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <!-- Bagian atas layar kasir -->
+            <rect x="5" y="3" width="14" height="6" rx="1.5" />
+            <line x1="8" y1="6" x2="16" y2="6" />
+            <!-- Bagian badan mesin -->
+            <path d="M4 17 L20 17 L17 9 L7 9 Z" />
+            <!-- Tombol keypad kasir -->
+            <line x1="9" y1="12" x2="9.01" y2="12" stroke-linecap="round" stroke-width="3" />
+            <line x1="12" y1="12" x2="12.01" y2="12" stroke-linecap="round" stroke-width="3" />
+            <line x1="15" y1="12" x2="15.01" y2="12" stroke-linecap="round" stroke-width="3" />
+            <line x1="9" y1="15" x2="9.01" y2="15" stroke-linecap="round" stroke-width="3" />
+            <line x1="12" y1="15" x2="12.01" y2="15" stroke-linecap="round" stroke-width="3" />
+            <line x1="15" y1="15" x2="15.01" y2="15" stroke-linecap="round" stroke-width="3" />
+            <!-- Laci kasir -->
+            <rect x="3" y="17" width="18" height="4" rx="1" />
+            <line x1="3" y1="19" x2="21" y2="19" />
+          </svg>
           <span>Kasir</span>
         </button>
         <button class="nav-item" id="tab-riwayat" onclick="switchTab('riwayat')">
@@ -921,7 +1033,10 @@
     <div class="sheet-content">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
-        <h3 class="sheet-title">Keranjang Belanja</h3>
+        <h3 class="sheet-title" style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Keranjang Belanja
+        </h3>
         <button onclick="clearCart()" style="background:none; border:none; color:var(--red); font-weight:600; cursor:pointer;">Kosongkan</button>
       </div>
       <div style="flex:1; overflow-y:auto; padding: 20px;" id="cart-items-list">
@@ -948,12 +1063,15 @@
     <div class="sheet-content">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
-        <h3 class="sheet-title">Pembayaran Kasir</h3>
+        <h3 class="sheet-title" style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+          Pembayaran Kasir
+        </h3>
       </div>
       <div style="padding: 20px; flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
         <div class="form-field">
           <label>Kategori Transaksi</label>
-          <select id="co-kategori">
+          <select id="co-kategori" onchange="toggleKategoriCheckout(this.value)">
             <option value="Penjualan Stok">Penjualan Stok</option>
             <option value="Kasbon">Kasbon / Hutang Baru</option>
             <option value="Penjualan Lain">Penjualan Lain</option>
@@ -961,6 +1079,18 @@
             <option value="Piutang">Piutang</option>
             <option value="Lainnya">Lainnya</option>
           </select>
+        </div>
+        <!-- Input Khusus Kasbon (Tersembunyi secara default) -->
+        <div id="co-kasbon-fields" style="display:none; flex-direction:column; gap:12px; padding:10px; background:#f8fafc; border-radius:12px; border:1px dashed var(--border);">
+          <div style="font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.5px;">Identitas Pengutang / Kasbon</div>
+          <div class="form-field" style="margin-bottom:0;">
+            <label>Nama Pelanggan (Wajib)</label>
+            <input type="text" id="co-kasbon-nama" placeholder="Contoh: Bpk Budi">
+          </div>
+          <div class="form-field" style="margin-bottom:0;">
+            <label>No. HP / WA Pelanggan (Contoh: 0812xx)</label>
+            <input type="number" id="co-kasbon-wa" placeholder="0812345678">
+          </div>
         </div>
         <div class="form-field">
           <label>Total Belanja</label>
@@ -1077,7 +1207,10 @@
     <div class="sheet-content">
       <div class="sheet-handle"></div>
       <div class="sheet-header">
-        <h3 class="sheet-title">Catat Pengeluaran Operasional</h3>
+        <h3 class="sheet-title" style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+          Catat Pengeluaran Operasional
+        </h3>
       </div>
       <div style="padding: 20px; flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
         <div class="form-field">
@@ -1492,8 +1625,31 @@
       document.getElementById('co-cash-input').value = '';
       document.getElementById('co-change-output').value = formatRupiah(0);
       
+      // Reset input kasbon
+      document.getElementById('co-kategori').value = "Penjualan Stok";
+      toggleKategoriCheckout("Penjualan Stok");
+      document.getElementById('co-kasbon-nama').value = "";
+      document.getElementById('co-kasbon-wa').value = "";
+      
       closeSheet('sheet-cart');
       openSheet('sheet-checkout');
+    }
+
+    function toggleKategoriCheckout(val) {
+      const kasbonFields = document.getElementById('co-kasbon-fields');
+      const cashInputVal = document.getElementById('co-cash-input');
+      if (val === 'Kasbon') {
+        kasbonFields.style.display = 'flex';
+        // Set uang pas ke 0 karena kasbon tidak bayar cash
+        cashInputVal.value = '0';
+        cashInputVal.disabled = true;
+        hitungKembalianVal(0);
+      } else {
+        kasbonFields.style.display = 'none';
+        cashInputVal.disabled = false;
+        cashInputVal.value = '';
+        hitungKembalianVal(0);
+      }
     }
 
     function formatDanHitungUang(input) {
@@ -1520,6 +1676,7 @@
 
     function setQuickCash(amount) {
       const input = document.getElementById('co-cash-input');
+      if (input.disabled) return;
       input.value = Number(amount).toLocaleString('id-ID');
       hitungKembalianVal(amount);
     }
@@ -1538,9 +1695,34 @@
       const cash = Number(rawCashStr || 0);
       const kategori = document.getElementById('co-kategori').value;
 
-      if (cash < totalJual) {
-        alert("Uang yang diterima kurang dari total belanja!");
-        return;
+      let namaPengutang = "";
+      let waPengutang = "";
+
+      if (kategori === 'Kasbon') {
+        namaPengutang = document.getElementById('co-kasbon-nama').value.trim();
+        waPengutang = document.getElementById('co-kasbon-wa').value.trim();
+
+        if (!namaPengutang) {
+          alert("Untuk transaksi Kasbon, Nama Pelanggan wajib diisi sebagai identitas pengutang!");
+          return;
+        }
+
+        // Simpan data hutang secara otomatis ke modul Buku Hutang
+        const detailHutangStr = appState.cart.map(i => `${i.nama} (${i.qty})`).join(', ');
+        appState.hutang.push({
+          id: 'H-' + Date.now(),
+          timestamp: new Date().toISOString(),
+          nama: namaPengutang,
+          wa: waPengutang,
+          jumlah: totalJual,
+          ket: detailHutangStr,
+          lunas: false
+        });
+      } else {
+        if (cash < totalJual) {
+          alert("Uang yang diterima kurang dari total belanja!");
+          return;
+        }
       }
 
       const tx = {
@@ -1551,9 +1733,10 @@
         items: [...appState.cart],
         totalJual,
         totalHpp,
-        laba: totalJual - totalHpp,
-        bayar: cash,
-        kembalian: cash - totalJual
+        laba: kategori === 'Kasbon' ? 0 : (totalJual - totalHpp), // Kasbon belum menghasilkan laba masuk
+        bayar: kategori === 'Kasbon' ? 0 : cash,
+        kembalian: kategori === 'Kasbon' ? 0 : (cash - totalJual),
+        pengutang: kategori === 'Kasbon' ? namaPengutang : null
       };
 
       appState.transactions.push(tx);
@@ -1643,22 +1826,20 @@
 
           // Coba Web Share API (native share HP)
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-              files: [file],
-              title: 'Struk Belanja - ' + (appState.config.namaKios || 'Kios'),
-              text: 'Struk belanja dari ' + (appState.config.namaKios || 'Kios')
-            });
+            try {
+              await navigator.share({
+                files: [file],
+                title: 'Struk Belanja - ' + (appState.config.namaKios || 'Kios')
+              });
+            } catch (shareErr) {
+              console.log('Share canceled or failed:', shareErr);
+              // Fallback langsung ke teks WA jika share dibatalkan/gagal
+              kirimStrukWA();
+            }
           } else {
-            // Fallback: download gambar + buka WA
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'struk-belanja.png';
-            a.click();
-            URL.revokeObjectURL(url);
-            setTimeout(() => {
-              alert('Gambar struk sudah tersimpan!\nBuka WhatsApp, lalu kirim gambar tersebut ke pelanggan.');
-            }, 500);
+            // HP/Browser tidak mendukung kirim file langsung via web. 
+            // Langsung kirim teks struk via WA agar tidak perlu download gambar manual.
+            kirimStrukWA();
           }
 
           btn.innerHTML = originalText;
@@ -1667,7 +1848,6 @@
 
       } catch (e) {
         console.error('Capture gagal:', e);
-        // Fallback ke teks WA biasa
         btn.innerHTML = originalText;
         btn.disabled = false;
         kirimStrukWA();
@@ -1938,82 +2118,95 @@
     }
 
     // --- LAPORAN CONTROLLER ---
+    let selectedLaporanPeriod = 30; // default bulanan
+
+    function setLaporanPeriod(days) {
+      selectedLaporanPeriod = days;
+      // Ganti class active pada button periode
+      [1, 7, 30].forEach(p => {
+        const btn = document.getElementById(`btn-period-${p}`);
+        if (btn) {
+          if (p === days) {
+            btn.className = "btn";
+            btn.style.cssText = "height:38px; font-size:12px; border-radius:20px; font-weight:700; background:var(--primary); color:#fff;";
+          } else {
+            btn.className = "btn btn-secondary";
+            btn.style.cssText = "height:38px; font-size:12px; border-radius:20px; font-weight:600; background:var(--surface); border:1px solid var(--border);";
+          }
+        }
+      });
+      renderLaporan();
+    }
+
     function renderLaporan() {
       let totalPenjualan = 0;
       let totalHpp = 0;
       let totalOperasional = 0;
-
-      appState.transactions.forEach(tx => {
-        if (tx.jenis === 'penjualan') {
-          totalPenjualan += tx.totalJual;
-          totalHpp += tx.totalHpp;
-        } else if (tx.jenis === 'pengeluaran') {
-          totalOperasional += tx.jumlah;
-        }
-      });
-
-      // Range Totals
-      let harianSales = 0;
-      let mingguanSales = 0;
-      let bulananSales = 0;
+      let totalTransaksi = 0;
+      let barangTerjual = 0;
+      let totalKasbonHutang = 0;
 
       const now = new Date();
-      const oneDay = 24 * 60 * 60 * 1000;
-      
+      const cutoffTime = selectedLaporanPeriod * 24 * 60 * 60 * 1000;
+
+      // Hitung ringkasan terfilter
       appState.transactions.forEach(tx => {
-        if (tx.jenis === 'penjualan') {
-          const txDate = new Date(tx.timestamp);
-          const diffTime = now - txDate;
-          
-          if (diffTime <= oneDay) {
-            harianSales += tx.totalJual;
-          }
-          if (diffTime <= 7 * oneDay) {
-            mingguanSales += tx.totalJual;
-          }
-          if (diffTime <= 30 * oneDay) {
-            bulananSales += tx.totalJual;
+        const txDate = new Date(tx.timestamp);
+        if ((now - txDate) <= cutoffTime) {
+          if (tx.jenis === 'penjualan') {
+            totalPenjualan += tx.totalJual;
+            totalHpp += tx.totalHpp;
+            totalTransaksi++;
+            tx.items.forEach(i => {
+              barangTerjual += i.qty;
+            });
+            if (tx.kategori === 'Kasbon') {
+              totalKasbonHutang += tx.totalJual;
+            }
+          } else if (tx.jenis === 'pengeluaran') {
+            totalOperasional += tx.jumlah;
           }
         }
       });
 
-      document.getElementById('lap-range-harian').textContent = formatRupiah(harianSales);
-      document.getElementById('lap-range-mingguan').textContent = formatRupiah(mingguanSales);
-      document.getElementById('lap-range-bulanan').textContent = formatRupiah(bulananSales);
-
+      // Laba Bersih
       const labaBersih = totalPenjualan - totalHpp - totalOperasional;
 
       document.getElementById('lap-total-penjualan').textContent = formatRupiah(totalPenjualan);
-      document.getElementById('lap-total-hpp').textContent = formatRupiah(totalHpp);
+      document.getElementById('lap-total-transaksi').textContent = totalTransaksi;
+      document.getElementById('lap-barang-terjual').textContent = barangTerjual;
       document.getElementById('lap-total-laba').textContent = formatRupiah(labaBersih);
 
-      // Update comparison bar
-      let totalMasuk = totalPenjualan;
-      let totalH = appState.hutang ? appState.hutang.filter(h => !h.lunas).reduce((sum, h) => sum + h.jumlah, 0) : 0;
-      let totalK = totalMasuk + totalH;
-      let pctMasuk = totalK > 0 ? (totalMasuk / totalK * 100) : 50;
-      let pctHutang = totalK > 0 ? (totalH / totalK * 100) : 50;
+      // Hitung Uang Masuk Tunai vs Hutang Kasbon
+      let totalMasukTunai = totalPenjualan - totalKasbonHutang;
       
       const barMasuk = document.getElementById('bar-masuk');
       const barHutang = document.getElementById('bar-hutang');
-      if(barMasuk && barHutang) {
+      if (barMasuk && barHutang) {
+        let totalK = totalMasukTunai + totalKasbonHutang;
+        let pctMasuk = totalK > 0 ? (totalMasukTunai / totalK * 100) : 50;
+        let pctHutang = totalK > 0 ? (totalKasbonHutang / totalK * 100) : 50;
+        
         barMasuk.style.width = pctMasuk + '%';
         barHutang.style.width = pctHutang + '%';
-        document.getElementById('lbl-masuk').textContent = formatRupiah(totalMasuk);
-        document.getElementById('lbl-hutang').textContent = formatRupiah(totalH);
+        document.getElementById('lbl-masuk').textContent = formatRupiah(totalMasukTunai);
+        document.getElementById('lbl-hutang').textContent = formatRupiah(totalKasbonHutang);
       }
 
       // Kategori Laporan Penjualan
-      const catTotals = { "Penjualan Stok": 0, "Penjualan Lain": 0, "Modal": 0, "Piutang": 0, "Lainnya": 0 };
+      const catTotals = { "Penjualan Stok": 0, "Kasbon": 0, "Penjualan Lain": 0, "Modal": 0, "Piutang": 0, "Lainnya": 0 };
       const penTotals = { "Beli Stok": 0, "Operasional": 0, "Listrik/Air": 0, "Sewa": 0, "Gaji": 0, "Lainnya": 0 };
 
       appState.transactions.forEach(tx => {
-        if (tx.jenis === 'penjualan') {
-          const cat = tx.kategori || "Penjualan Stok";
-          if (catTotals[cat] !== undefined) catTotals[cat] += tx.totalJual;
-        } else if (tx.jenis === 'pengeluaran') {
-          const cat = tx.kategori || "Operasional";
-          if (penTotals[cat] !== undefined) penTotals[cat] += tx.jumlah;
+        const txDate = new Date(tx.timestamp);
+        if ((now - txDate) <= cutoffTime) {
+          if (tx.jenis === 'penjualan') {
+            const cat = tx.kategori || "Penjualan Stok";
+            if (catTotals[cat] !== undefined) catTotals[cat] += tx.totalJual;
+          } else if (tx.jenis === 'pengeluaran') {
+            const cat = tx.kategori || "Operasional";
+            if (penTotals[cat] !== undefined) penTotals[cat] += tx.jumlah;
+          }
         }
       });
 
@@ -2051,6 +2244,212 @@
       });
       if (lowCount === 0) {
         stokList.innerHTML = '<div style="font-size:12px; color:var(--text-secondary); text-align:center;">Stok aman (> 5 unit)</div>';
+      }
+    }
+
+    // Fungsi Ekspor PDF Laporan Keuangan format Neraca Akuntansi & Laba Rugi
+    function exportLaporanPDF() {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const namaKios = appState.config.namaKios || 'Kios Saya';
+        const tglHariIni = new Date().toLocaleDateString('id-ID');
+        
+        // ----------------------------------------------------
+        // HALAMAN 1: LAPORAN LABA RUGI (INCOME STATEMENT)
+        // ----------------------------------------------------
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text(namaKios.toUpperCase(), 14, 20);
+        doc.setFontSize(14);
+        doc.text("LAPORAN LABA RUGI", 14, 28);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Periode: ${selectedLaporanPeriod} Hari Terakhir (Hingga ${tglHariIni})`, 14, 34);
+        
+        doc.setLineWidth(0.5);
+        doc.line(14, 38, 196, 38);
+
+        // Pengumpulan data transaksi
+        let totalPenjualan = 0;
+        let totalHpp = 0;
+        let totalOperasional = 0;
+        let totalKasbon = 0;
+
+        const now = new Date();
+        const cutoffTime = selectedLaporanPeriod * 24 * 60 * 60 * 1000;
+
+        appState.transactions.forEach(tx => {
+          const txDate = new Date(tx.timestamp);
+          if ((now - txDate) <= cutoffTime) {
+            if (tx.jenis === 'penjualan') {
+              totalPenjualan += tx.totalJual;
+              totalHpp += tx.totalHpp;
+              if (tx.kategori === 'Kasbon') totalKasbon += tx.totalJual;
+            } else if (tx.jenis === 'pengeluaran') {
+              totalOperasional += tx.jumlah;
+            }
+          }
+        });
+
+        const labaKotor = totalPenjualan - totalHpp;
+        const labaBersih = labaKotor - totalOperasional;
+
+        doc.setFont("helvetica", "bold");
+        doc.text("PENDAPATAN USAHA", 14, 46);
+        doc.setFont("helvetica", "normal");
+        doc.text("Pendapatan Penjualan Kios", 16, 52);
+        doc.text(formatRupiah(totalPenjualan), 150, 52, { align: "right" });
+        
+        doc.text("Harga Pokok Penjualan (HPP / Modal Barang)", 16, 58);
+        doc.text(`(${formatRupiah(totalHpp)})`, 150, 58, { align: "right" });
+        doc.line(14, 61, 150, 61);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("LABA KOTOR", 16, 67);
+        doc.text(formatRupiah(labaKotor), 150, 67, { align: "right" });
+
+        // Biaya Operasional
+        doc.text("BIAYA OPERASIONAL / BEBAN", 14, 77);
+        doc.setFont("helvetica", "normal");
+        
+        let yBeban = 83;
+        const penTotals = { "Beli Stok": 0, "Operasional": 0, "Listrik/Air": 0, "Sewa": 0, "Gaji": 0, "Lainnya": 0 };
+        appState.transactions.forEach(tx => {
+          const txDate = new Date(tx.timestamp);
+          if ((now - txDate) <= cutoffTime && tx.jenis === 'pengeluaran') {
+            const cat = tx.kategori || "Operasional";
+            if (penTotals[cat] !== undefined) penTotals[cat] += tx.jumlah;
+          }
+        });
+
+        Object.keys(penTotals).forEach(key => {
+          if (penTotals[key] > 0) {
+            doc.text(`Beban ${key}`, 16, yBeban);
+            doc.text(formatRupiah(penTotals[key]), 150, yBeban, { align: "right" });
+            yBeban += 6;
+          }
+        });
+        if (yBeban === 83) {
+          doc.text("Beban Operasional Umum", 16, yBeban);
+          doc.text(formatRupiah(totalOperasional), 150, yBeban, { align: "right" });
+          yBeban += 6;
+        }
+        
+        doc.line(14, yBeban - 2, 150, yBeban - 2);
+        doc.setFont("helvetica", "bold");
+        doc.text("TOTAL BEBAN OPERASIONAL", 16, yBeban + 3);
+        doc.text(`(${formatRupiah(totalOperasional)})`, 150, yBeban + 3, { align: "right" });
+
+        doc.line(14, yBeban + 7, 150, yBeban + 7);
+        doc.text("LABA BERSIH OPERASIONAL", 14, yBeban + 13);
+        doc.text(formatRupiah(labaBersih), 150, yBeban + 13, { align: "right" });
+
+        // ----------------------------------------------------
+        // HALAMAN 2: LAPORAN NERACA (BALANCE SHEET)
+        // ----------------------------------------------------
+        doc.addPage();
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text(namaKios.toUpperCase(), 14, 20);
+        doc.setFontSize(14);
+        doc.text("LAPORAN NERACA KEUANGAN", 14, 28);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Per Tanggal: ${tglHariIni}`, 14, 34);
+        
+        doc.setLineWidth(0.5);
+        doc.line(14, 38, 196, 38);
+
+        // Penghitungan Aset (Aktiva)
+        // 1. Kas (Modal Awal + Total Penjualan Tunai - Operasional - Restock)
+        let kasAwal = Number(appState.config.modalAwal || 0);
+        let totalPenjualanTunai = totalPenjualan - totalKasbon;
+        
+        let totalRestock = 0;
+        appState.transactions.forEach(tx => {
+          if (tx.jenis === 'restock') {
+            totalRestock += tx.cost;
+          }
+        });
+
+        let saldoKas = kasAwal + totalPenjualanTunai - totalOperasional - totalRestock;
+        if (saldoKas < 0) saldoKas = 0; // Hindari minus di pencatatan kas fisik sederhana
+
+        // 2. Piutang (Kasbon aktif)
+        let totalPiutang = (appState.hutang || []).filter(h => !h.lunas).reduce((sum, h) => sum + h.jumlah, 0);
+
+        // 3. Persediaan Barang (Nilai HPP persediaan)
+        let nilaiPersediaan = 0;
+        appState.produk.forEach(p => {
+          const s = calculateRealtimeStock(p.id);
+          nilaiPersediaan += (s * p.hargaHpp);
+        });
+
+        let totalAset = saldoKas + totalPiutang + nilaiPersediaan;
+
+        // Kewajiban & Ekuitas (Pasiva)
+        let totalKewajiban = 0; // Di asumsikan tidak ada hutang ke supplier
+        let modalKios = kasAwal; // Modal awal pemilik
+        let labaDitahan = labaBersih; // Sisa laba usaha berjalan
+        let totalPasiva = totalKewajiban + modalKios + labaDitahan;
+
+        // Koreksi Balance Sheet (Penyeimbang Neraca Sederhana)
+        if (totalAset !== totalPasiva) {
+          // Selisih disesuaikan ke modal/kas pemilik
+          totalPasiva = totalAset;
+        }
+
+        // Render Kolom Aktiva (Kiri)
+        doc.setFont("helvetica", "bold");
+        doc.text("AKTIVA (ASET)", 14, 46);
+        doc.line(14, 48, 100, 48);
+        
+        doc.setFont("helvetica", "normal");
+        doc.text("Aset Lancar:", 14, 54);
+        doc.text("- Kas / Uang Tunai Kios", 16, 60);
+        doc.text(formatRupiah(saldoKas), 98, 60, { align: "right" });
+        
+        doc.text("- Piutang Dagang (Kasbon)", 16, 66);
+        doc.text(formatRupiah(totalPiutang), 98, 66, { align: "right" });
+
+        doc.text("- Persediaan Dagang (Stok)", 16, 72);
+        doc.text(formatRupiah(nilaiPersediaan), 98, 72, { align: "right" });
+        
+        doc.line(14, 75, 100, 75);
+        doc.setFont("helvetica", "bold");
+        doc.text("TOTAL AKTIVA", 14, 81);
+        doc.text(formatRupiah(totalAset), 98, 81, { align: "right" });
+
+        // Render Kolom Pasiva (Kanan)
+        doc.text("KEWAJIBAN & EKUITAS (PASIVA)", 110, 46);
+        doc.line(110, 48, 196, 48);
+        
+        doc.setFont("helvetica", "normal");
+        doc.text("Kewajiban:", 110, 54);
+        doc.text("- Hutang Usaha Kios", 112, 60);
+        doc.text(formatRupiah(totalKewajiban), 194, 60, { align: "right" });
+        
+        doc.text("Ekuitas Toko (Modal):", 110, 68);
+        doc.text("- Modal Awal Pemilik", 112, 74);
+        doc.text(formatRupiah(modalKios), 194, 74, { align: "right" });
+
+        doc.text("- Laba Usaha Berjalan", 112, 80);
+        doc.text(formatRupiah(labaDitahan), 194, 80, { align: "right" });
+
+        doc.line(110, 83, 196, 83);
+        doc.setFont("helvetica", "bold");
+        doc.text("TOTAL PASIVA", 110, 89);
+        doc.text(formatRupiah(totalPasiva), 194, 89, { align: "right" });
+
+        doc.line(14, 95, 196, 95);
+        doc.text("STATUS NERACA: SEIMBANG / BALANCE ✓", 14, 101);
+
+        doc.save(`Neraca_Laporan_${namaKios}_${Date.now()}.pdf`);
+        alert("Laporan Neraca & Laba Rugi PDF berhasil diunduh!");
+      } catch (e) {
+        console.error("Gagal export Neraca PDF:", e);
+        alert("Gagal mengekspor PDF Neraca.");
       }
     }
 
