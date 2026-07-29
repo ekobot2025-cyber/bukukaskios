@@ -1915,13 +1915,12 @@
               });
             } catch (shareErr) {
               console.log('Share canceled or failed:', shareErr);
-              // Fallback langsung ke teks WA jika share dibatalkan/gagal
-              kirimStrukWA();
+              // Jika dibatalkan, tetap tawarkan download gambar
+              downloadStrukPNGFallback(blob);
             }
           } else {
-            // HP/Browser tidak mendukung kirim file langsung via web. 
-            // Langsung kirim teks struk via WA agar tidak perlu download gambar manual.
-            kirimStrukWA();
+            // HP/Browser tidak mendukung share gambar langsung, gunakan metode download otomatis
+            downloadStrukPNGFallback(blob);
           }
 
           btn.innerHTML = originalText;
@@ -1932,8 +1931,27 @@
         console.error('Capture gagal:', e);
         btn.innerHTML = originalText;
         btn.disabled = false;
+        alert('Gagal membuat gambar struk. Mengalihkan ke teks...');
         kirimStrukWA();
       }
+    }
+
+    // Fungsi pembantu download gambar struk otomatis + infokan user
+    function downloadStrukPNGFallback(blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Struk_${window.lastTransaction ? window.lastTransaction.id : 'Belanja'}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      setTimeout(() => {
+        alert('Gambar struk (.png) BERHASIL DISIMPAN ke Galeri HP Anda!\n\nSilakan pilih kontak pelanggan di WhatsApp lalu kirim gambar struk dari galeri tersebut.');
+        // Buka WhatsApp tanpa teks agar user bisa pilih kontak dan lampirkan gambar dari galeri
+        bukaWA('https://wa.me/');
+      }, 600);
     }
 
     function kirimStrukWA() {
