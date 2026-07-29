@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- html2canvas: capture struk sebagai gambar PNG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- jsPDF: ekspor PDF sesungguhnya untuk Buku Hutang -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
   <style>
     /* ==========================================
@@ -813,6 +815,27 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
 
+        <div class="settings-row" onclick="backupData()">
+          <div class="settings-row-left">
+            <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <div>
+              <div class="settings-label">Cadangkan Data (Backup)</div>
+              <div class="settings-desc">Simpan semua transaksi & produk ke file</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-row" onclick="document.getElementById('restore-file-input').click()">
+          <div class="settings-row-left">
+            <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <div>
+              <div class="settings-label">Pulihkan Data (Restore)</div>
+              <div class="settings-desc">Unggah file cadangan untuk memulihkan data</div>
+            </div>
+          </div>
+          <input type="file" id="restore-file-input" accept=".json" style="display:none;" onchange="restoreData(this)">
+        </div>
+
         <div class="settings-row" onclick="resetAplikasi()" style="margin-top: 24px; border-color: rgba(217,56,56,0.15);">
           <div class="settings-row-left">
             <svg style="color:var(--red);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
@@ -932,6 +955,7 @@
           <label>Kategori Transaksi</label>
           <select id="co-kategori">
             <option value="Penjualan Stok">Penjualan Stok</option>
+            <option value="Kasbon">Kasbon / Hutang Baru</option>
             <option value="Penjualan Lain">Penjualan Lain</option>
             <option value="Modal">Modal</option>
             <option value="Piutang">Piutang</option>
@@ -1116,6 +1140,17 @@
           <div class="form-field">
             <label>Satuan</label>
             <input type="text" id="form-p-satuan" placeholder="pcs">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Gambar / Foto Produk (Opsional)</label>
+          <div style="display:flex; align-items:center; gap:10px; margin-top:4px;">
+            <div id="form-p-img-preview" style="width:48px; height:48px; border-radius:8px; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; background:#f1f5f9;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <input type="file" id="form-p-file" accept="image/*" style="display:none;" onchange="handleProductImageUpload(this)">
+            <button class="btn btn-secondary" style="height:36px; padding:0 12px; font-size:12px;" onclick="document.getElementById('form-p-file').click()">Pilih Gambar</button>
+            <button class="btn btn-danger" id="form-p-btn-delete-img" style="height:36px; padding:0 12px; font-size:12px; display:none;" onclick="deleteProductImage()">Hapus</button>
           </div>
         </div>
       </div>
@@ -1306,7 +1341,6 @@
       return stock;
     }
 
-    // --- KASIR CONTROLLER ---
     function renderKasir() {
       const query = document.getElementById('kasir-search').value.toLowerCase();
       const grid = document.getElementById('kasir-p-grid');
@@ -1322,13 +1356,21 @@
           card.className = `premium-p-card ${inCartQty > 0 ? 'selected' : ''}`;
           card.onclick = () => addToCart(p.id);
 
+          // Gambar produk atau kosongkan/tidak tampilkan jika tidak ada
+          let imgHtml = '';
+          if (p.imgBase64) {
+            imgHtml = `<div class="p-emoji" style="text-align: center; margin-top: 8px; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; margin-left: auto; margin-right: auto; background:#f1f5f9;"><img src="${p.imgBase64}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+          } else {
+            imgHtml = `<div style="height: 12px;"></div>`; // Kosongkan ikon default agar bersih
+          }
+
           card.innerHTML = `
             ${inCartQty > 0 ? `<div class="cart-indicator">${inCartQty}</div>` : ''}
             <div style="position: absolute; top: 12px; left: 12px; color: var(--text-secondary); cursor: pointer; padding: 4px;" onclick="event.stopPropagation(); openProdukSheet('${p.id}')">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             </div>
-            <div class="p-emoji" style="text-align: center; margin-top: 8px; color: var(--primary);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-            <div class="p-title">${esc(p.nama)}</div>
+            ${imgHtml}
+            <div class="p-title" style="margin-top: 4px;">${esc(p.nama)}</div>
             <div class="p-price-tag">${formatRupiah(p.hargaJual)}</div>
             <div class="p-stock-info">
               <span>Stok: ${currentStock}</span>
@@ -1736,8 +1778,16 @@
           const currentStock = calculateRealtimeStock(p.id);
           const item = document.createElement('div');
           item.className = 'product-row';
+
+          let imgHtml = '';
+          if (p.imgBase64) {
+            imgHtml = `<div class="product-img-box" style="padding:0; overflow:hidden;"><img src="${p.imgBase64}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+          } else {
+            imgHtml = `<div class="product-img-box" style="color:var(--primary);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>`;
+          }
+
           item.innerHTML = `
-            <div class="product-img-box" style="color:var(--primary);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+            ${imgHtml}
             <div class="product-info">
               <span class="product-name">${esc(p.nama)}</span>
               <span class="product-category-badge">Beli: ${formatRupiah(p.hargaHpp)}</span>
@@ -1754,7 +1804,36 @@
       });
     }
 
+    // Logika upload foto produk
+    let tempProductImageBase64 = "";
+
+    function handleProductImageUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempProductImageBase64 = e.target.result;
+        setProductImagePreview(tempProductImageBase64);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setProductImagePreview(base64) {
+      const preview = document.getElementById('form-p-img-preview');
+      preview.innerHTML = `<img src="${base64}" style="width:100%; height:100%; object-fit:cover;">`;
+      document.getElementById('form-p-btn-delete-img').style.display = 'block';
+    }
+
+    function deleteProductImage() {
+      tempProductImageBase64 = "";
+      const preview = document.getElementById('form-p-img-preview');
+      preview.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+      document.getElementById('form-p-btn-delete-img').style.display = 'none';
+      document.getElementById('form-p-file').value = '';
+    }
+
     function openProdukSheet(productId) {
+      deleteProductImage(); // Reset temp
       if (productId) {
         const p = appState.produk.find(prod => prod.id === productId);
         document.getElementById('produk-sheet-title').textContent = "Edit Produk";
@@ -1765,6 +1844,10 @@
         document.getElementById('form-p-stok').value = p.stokAwal;
         document.getElementById('form-p-satuan').value = p.satuan || 'pcs';
         document.getElementById('btn-hapus-produk').style.display = 'block';
+        if (p.imgBase64) {
+          tempProductImageBase64 = p.imgBase64;
+          setProductImagePreview(p.imgBase64);
+        }
       } else {
         document.getElementById('produk-sheet-title').textContent = "Tambah Produk";
         document.getElementById('form-p-id').value = '';
@@ -1811,6 +1894,7 @@
           p.hargaJual = hargaJual;
           p.stokAwal = stokAwal;
           p.satuan = satuan;
+          p.imgBase64 = tempProductImageBase64;
         }
       } else {
         appState.produk.push({
@@ -1819,7 +1903,8 @@
           hargaHpp,
           hargaJual,
           stokAwal,
-          satuan
+          satuan,
+          imgBase64: tempProductImageBase64
         });
       }
 
@@ -2170,7 +2255,133 @@
     }
 
     function exportHutangPDF() {
-      alert("Fitur Export PDF Hutang siap digunakan! (Simulasi eksportir)");
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Header
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text(`LAPORAN BUKU HUTANG`, 14, 20);
+        doc.setFontSize(12);
+        doc.text(`Kios: ${appState.config.namaKios || 'Kios Saya'}`, 14, 28);
+        doc.text(`Tanggal Ekspor: ${new Date().toLocaleDateString('id-ID')}`, 14, 34);
+        
+        doc.setLineWidth(0.5);
+        doc.line(14, 38, 196, 38);
+        
+        // Daftar Hutang Aktif
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        
+        let y = 46;
+        let total = 0;
+        
+        const activeHutang = (appState.hutang || []).filter(h => !h.lunas);
+        
+        if (activeHutang.length === 0) {
+          doc.text("Tidak ada data hutang aktif saat ini.", 14, y);
+        } else {
+          // Table Headers
+          doc.setFont("helvetica", "bold");
+          doc.text("Nama Pelanggan", 14, y);
+          doc.text("Nomor WA", 70, y);
+          doc.text("Keterangan", 115, y);
+          doc.text("Jumlah (Rp)", 165, y);
+          
+          doc.line(14, y+2, 196, y+2);
+          doc.setFont("helvetica", "normal");
+          y += 8;
+          
+          activeHutang.forEach(h => {
+            total += h.jumlah;
+            
+            // Cek jika halaman hampir penuh
+            if (y > 275) {
+              doc.addPage();
+              y = 20;
+            }
+            
+            doc.text(h.nama.substring(0, 22), 14, y);
+            doc.text((h.wa || '-').substring(0, 18), 70, y);
+            doc.text(h.ket.substring(0, 22), 115, y);
+            doc.text(formatRupiah(h.jumlah), 165, y);
+            
+            y += 8;
+          });
+          
+          doc.line(14, y, 196, y);
+          y += 8;
+          doc.setFont("helvetica", "bold");
+          doc.text("TOTAL PIUTANG:", 115, y);
+          doc.text(formatRupiah(total), 165, y);
+        }
+        
+        doc.save(`Laporan_Hutang_${appState.config.namaKios || 'Kios'}_${Date.now()}.pdf`);
+        alert("Laporan PDF berhasil diunduh!");
+      } catch (error) {
+        console.error("PDF export error:", error);
+        alert("Gagal mengekspor PDF, pastikan koneksi internet aktif untuk memuat library PDF.");
+      }
+    }
+
+    // Fungsi Backup & Restore JSON Data Kios
+    function backupData() {
+      try {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `Cadangan_Kios_POS_${Date.now()}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        document.body.removeChild(downloadAnchor);
+        alert("Data cadangan (backup) berhasil diunduh!");
+      } catch (e) {
+        alert("Gagal melakukan pencadangan data: " + e.message);
+      }
+    }
+
+    function restoreData(input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      if (!confirm("Apakah Anda yakin ingin memulihkan data dari file ini?\n\nPERINGATAN: Data yang ada saat ini akan sepenuhnya ditimpa!")) {
+        input.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const importedState = JSON.parse(e.target.result);
+          
+          // Validasi sederhana struktur data
+          if (importedState && typeof importedState === 'object' && importedState.config) {
+            appState = importedState;
+            saveState();
+            
+            // Sync UI
+            document.getElementById('set-nama-kios').value = appState.config.namaKios || 'Kios Saya';
+            document.getElementById('set-modal-kios').value = appState.config.modalAwal || 0;
+            document.getElementById('store-title-header').textContent = appState.config.namaKios || 'Kios Saya';
+            
+            if (appState.config.logoBase64) {
+              setLogoUI(appState.config.logoBase64);
+            } else {
+              resetLogoUI();
+            }
+
+            renderAll();
+            alert("Data berhasil dipulihkan (restore) sepenuhnya!");
+          } else {
+            alert("Format file cadangan tidak valid!");
+          }
+        } catch (err) {
+          alert("Gagal membaca file restore: " + err.message);
+        }
+        input.value = '';
+      };
+      reader.readAsText(file);
     }
 
     window.onload = init;
