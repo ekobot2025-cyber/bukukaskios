@@ -1538,20 +1538,14 @@
       openSheet('sheet-receipt');
     }
 
-    // Helper: buka URL tanpa diblokir popup blocker HP
+    // Helper: buka URL WhatsApp — gunakan location.href agar selalu berfungsi di HP
     function bukaWA(url) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.location.href = url;
     }
 
-    function kirimStokWA() {
+    function kirimStrukWA() {
       const tx = window.lastTransaction;
-      if (!tx) return;
+      if (!tx) { alert('Data transaksi tidak ditemukan.'); return; }
       
       let text = `*STRUK BELANJA*\n`;
       text += `*${appState.config.namaKios || 'Kios'}*\n`;
