@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -43,6 +43,7 @@
       color: var(--text);
       overflow: hidden;
       height: 100vh;
+      height: 100dvh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -53,6 +54,7 @@
       width: 100%;
       max-width: 450px;
       height: 100vh;
+      height: 100dvh;
       background: var(--bg);
       display: flex;
       flex-direction: column;
@@ -64,6 +66,7 @@
     @media (min-width: 450px) {
       .app-container {
         height: 92vh;
+        height: 92dvh;
         border-radius: 36px;
         border: 8px solid #1e293b;
       }
@@ -132,7 +135,8 @@
       flex-direction: column;
       overflow-y: auto;
       padding: 16px;
-      padding-bottom: 110px;
+      padding-bottom: 130px;
+      padding-bottom: calc(130px + env(safe-area-inset-bottom));
       -webkit-overflow-scrolling: touch;
     }
     .view-panel.active {
@@ -442,7 +446,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 80px;
+      height: calc(80px + env(safe-area-inset-bottom));
       background: transparent;
       pointer-events: none;
       z-index: 100;
@@ -454,13 +458,15 @@
       left: 0;
       right: 0;
       height: 64px;
+      padding-bottom: env(safe-area-inset-bottom);
       background: var(--surface);
       border-top: 1px solid var(--border);
       pointer-events: auto;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 0 10px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
     .nav-item {
@@ -1151,7 +1157,7 @@
 
     // --- INITIALIZATION & PERSISTENCE ---
     function init() {
-      // Browser fallback storage (safe for non-Android environments)
+      // Definisikan window.storage aman di browser mandiri agar tidak crash
       if (typeof window.storage === 'undefined') {
         window.storage = {
           get: function(key) { return Promise.resolve({ value: localStorage.getItem(key) }); },
@@ -1167,23 +1173,10 @@
           if (!appState.transactions) appState.transactions = [];
           if (!appState.cart) appState.cart = [];
           if (!appState.hutang) appState.hutang = [];
-          if (!appState.config) appState.config = { namaKios: "Kios Saya", modalAwal: 0 };
+          if (!appState.config) appState.config = { namaKios: "Kios Premium", modalAwal: 0 };
         } catch (e) {
           console.error("Failed to parse state", e);
         }
-      } else {
-        // DATA AWAL: diisi otomatis untuk pengguna baru sebagai contoh
-        // Pengguna dapat mereset data ini kapan saja melalui menu Pengaturan > Reset
-        appState.config.namaKios = "Kios Contoh";
-        appState.produk = [
-          { id: 'DEMO1', nama: 'Indomie Goreng', hargaHpp: 2500, hargaJual: 3500, stokAwal: 50, satuan: 'pcs' },
-          { id: 'DEMO2', nama: 'Aqua 600ml', hargaHpp: 2000, hargaJual: 3000, stokAwal: 30, satuan: 'botol' },
-          { id: 'DEMO3', nama: 'Teh Kotak 300ml', hargaHpp: 3500, hargaJual: 5000, stokAwal: 24, satuan: 'pcs' },
-          { id: 'DEMO4', nama: 'Rokok Surya 12', hargaHpp: 20000, hargaJual: 23000, stokAwal: 10, satuan: 'bungkus' },
-          { id: 'DEMO5', nama: 'Kopi Kapal Api', hargaHpp: 1500, hargaJual: 2500, stokAwal: 40, satuan: 'sachet' },
-          { id: 'DEMO6', nama: 'Gula Pasir 1kg', hargaHpp: 13000, hargaJual: 15000, stokAwal: 8, satuan: 'kg' }
-        ];
-        localStorage.setItem('kios_pos_state', JSON.stringify(appState));
       }
 
       // UI Sync
@@ -1545,25 +1538,36 @@
       openSheet('sheet-receipt');
     }
 
+    // Helper: buka URL tanpa diblokir popup blocker HP
+    function bukaWA(url) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
     function kirimStokWA() {
       const tx = window.lastTransaction;
       if (!tx) return;
       
-      let text = `*STRUK BELANJA - ${appState.config.namaKios || "Kios"}*\n`;
-      text += `ID: ${tx.id}\n`;
+      let text = `*STRUK BELANJA*\n`;
+      text += `*${appState.config.namaKios || 'Kios'}*\n`;
       text += `Tanggal: ${new Date(tx.timestamp).toLocaleString('id-ID')}\n`;
-      text += `=========================\n`;
+      text += `ID: ${tx.id}\n`;
+      text += `---------------------------\n`;
       tx.items.forEach(item => {
-        text += `- ${item.nama} (${item.qty} x ${formatRupiah(item.hargaJual)})\n`;
+        text += `${item.nama}\n  ${item.qty} x ${formatRupiah(item.hargaJual)} = *${formatRupiah(item.qty * item.hargaJual)}*\n`;
       });
-      text += `=========================\n`;
+      text += `---------------------------\n`;
       text += `*Total: ${formatRupiah(tx.totalJual)}*\n`;
-      text += `Bayar: ${formatRupiah(tx.bayar)}\n`;
+      text += `Bayar : ${formatRupiah(tx.bayar)}\n`;
       text += `Kembali: ${formatRupiah(tx.kembalian)}\n\n`;
-      text += `Terima kasih telah berbelanja!`;
+      text += `_Terima kasih telah berbelanja!_ 🙏`;
 
-      const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
-      window.open(url, '_blank');
+      bukaWA('https://wa.me/?text=' + encodeURIComponent(text));
     }
 
     // --- RIWAYAT VIEW (Gambar 2 style) ---
@@ -2072,9 +2076,14 @@
     }
 
     function tagihWA(wa, nama, jumlah) {
-      if(!wa) { alert("Nomor WA tidak tersedia!"); return; }
-      const text = encodeURIComponent(`Halo Bpk/Ibu ${nama}, kami dari ${appState.config.namaKios} ingin mengingatkan tagihan belanja sebesar ${formatRupiah(jumlah)}. Mohon untuk segera diselesaikan. Terima kasih!`);
-      window.open(`https://wa.me/${wa}?text=${text}`, '_blank');
+      if(!wa || wa.trim() === '') { 
+        alert('Nomor WA pelanggan ini belum diisi!\nEdit data hutang untuk menambahkan nomor HP.');
+        return;
+      }
+      // Bersihkan nomor: hapus karakter non-angka, ubah awalan 0 ke 62
+      const nomorBersih = wa.replace(/[^0-9]/g, '').replace(/^0/, '62');
+      const text = `Halo Bpk/Ibu *${nama}*,\n\nKami dari *${appState.config.namaKios || 'Kios'}* ingin mengingatkan tagihan belanja Anda sebesar *${formatRupiah(jumlah)}*.\n\nMohon untuk segera diselesaikan. Terima kasih! 🙏`;
+      bukaWA(`https://wa.me/${nomorBersih}?text=${encodeURIComponent(text)}`);
     }
 
     function exportHutangPDF() {
@@ -2085,4 +2094,3 @@
   </script>
 </body>
 </html>
-
