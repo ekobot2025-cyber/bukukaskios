@@ -34,6 +34,82 @@
       --nav-h: 72px;
     }
 
+    /* SISTEM TEMA GELAP (DARK MODE PREMIUM - AMOLED & CARBON) */
+    .app-container.dark-theme {
+      --bg: #090d16;            /* Hitam arang pekat (Amoled Carbon) agar sangat premium */
+      --surface: #151f32;       /* Biru gelap navy untuk kartu kontras tinggi */
+      --text: #ffffff;          /* Putih bersih maksimal */
+      --text-secondary: #cbd5e1;/* Abu-abu terang agar teks tetap terbaca sangat jelas */
+      --text-muted: #64748b;
+      --border: #22314d;        /* Border navy tegas */
+      --primary: #3b82f6;       /* Biru neon menyala cerah */
+      --primary-light: rgba(59, 130, 246, 0.15);
+      --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .app-container.dark-theme input, 
+    .app-container.dark-theme select,
+    .app-container.dark-theme .premium-card,
+    .app-container.dark-theme .tx-card,
+    .app-container.dark-theme .settings-row,
+    .app-container.dark-theme .product-row {
+      background-color: #151f32 !important;
+      color: #ffffff !important;
+      border-color: #22314d !important;
+    }
+
+    .app-container.dark-theme input::placeholder {
+      color: #64748b !important;
+    }
+
+    .app-container.dark-theme .cart-floating-fab {
+      background: #151f32 !important;
+      border-color: #22314d !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .app-container.dark-theme .cart-tagihan-value {
+      color: #60a5fa !important;
+    }
+
+    .app-container.dark-theme .qty-btn {
+      background: #22314d !important;
+      color: #ffffff !important;
+      border-color: #3b82f6 !important;
+    }
+
+    /* Memastikan link/garis pembatas list di mode gelap cerah */
+    .app-container.dark-theme div[style*="border-bottom"] {
+      border-bottom-color: #22314d !important;
+    }
+    
+    .app-container.dark-theme span[style*="color:var(--primary)"] {
+      color: #60a5fa !important;
+    }
+    
+    .app-container.dark-theme .app-header {
+      background: #090d16 !important;
+      border-bottom-color: #22314d !important;
+    }
+    
+    .app-container.dark-theme .nav-wrapper {
+      background: #090d16 !important;
+      border-top-color: #22314d !important;
+    }
+
+    .app-container.dark-theme .nav-bg {
+      background: #151f32 !important;
+      border-color: #22314d !important;
+    }
+
+    .app-container.dark-theme .nav-item {
+      color: #94a3b8 !important;
+    }
+
+    .app-container.dark-theme .nav-item.active {
+      color: #60a5fa !important;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -719,9 +795,12 @@
         <button class="icon-btn" onclick="openProfileSettings()" title="Pengaturan" style="width:36px; height:36px; border-radius:10px; background:var(--primary-light); display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; color:var(--primary);">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
-        <div style="width:32px; height:32px; border-radius:8px; background:var(--primary); display:flex; align-items:center; justify-content:center;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
+        <button class="icon-btn" id="theme-toggle-btn" onclick="toggleTheme()" title="Ganti Tema" style="width:36px; height:36px; border-radius:10px; background:var(--primary-light); display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; color:var(--primary);">
+          <!-- Ikon matahari default (Light Mode) -->
+          <svg id="theme-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <!-- Ikon bulan (Dark Mode) - disembunyikan default -->
+          <svg id="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
     </header>
 
@@ -1368,6 +1447,9 @@
       document.getElementById('set-nama-kios').value = appState.config.namaKios;
       document.getElementById('set-modal-kios').value = appState.config.modalAwal;
       document.getElementById('store-title-header').textContent = appState.config.namaKios;
+
+      // Theme Sync
+      loadTheme();
 
       // Logo Sync
       if (appState.config.logoBase64) {
@@ -2781,6 +2863,34 @@
         input.value = '';
       };
       reader.readAsText(file);
+    }
+
+    // Fungsi Tema Gelap & Terang
+    function toggleTheme() {
+      const container = document.querySelector('.app-container');
+      const isDark = container.classList.toggle('dark-theme');
+      
+      // Update ikon
+      document.getElementById('theme-sun-icon').style.display = isDark ? 'none' : 'block';
+      document.getElementById('theme-moon-icon').style.display = isDark ? 'block' : 'none';
+      
+      // Simpan preferensi
+      localStorage.setItem('kios_theme', isDark ? 'dark' : 'light');
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('kios_theme');
+      const container = document.querySelector('.app-container');
+      
+      if (savedTheme === 'dark') {
+        container.classList.add('dark-theme');
+        document.getElementById('theme-sun-icon').style.display = 'none';
+        document.getElementById('theme-moon-icon').style.display = 'block';
+      } else {
+        container.classList.remove('dark-theme');
+        document.getElementById('theme-sun-icon').style.display = 'block';
+        document.getElementById('theme-moon-icon').style.display = 'none';
+      }
     }
 
     window.onload = init;
