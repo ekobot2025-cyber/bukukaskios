@@ -82,3 +82,9 @@ Aplikasi ini dibungkus menggunakan arsitektur hybrid WebView yang ringan dengan 
 * **Slogan**: *"Hen wani Kami Membumi"*
 
 Aplikasi ini didedikasikan secara gratis untuk memajukan perekonomian kampung dan digitalisasi UMKM di Papua.
+
+---
+
+## ☕ Dukungan & Donasi
+Jika aplikasi ini bermanfaat bagi Anda dan ingin memberikan apresiasi kepada pengembang, Anda dapat menyalurkan donasi/dukungan melalui Saweria:
+👉 **[Donasi via Saweria](https://saweria.co/ekobot)**
