@@ -1175,18 +1175,25 @@ function downloadStrukImage(){
 
 function shareStrukImageWA(){
   if(!lastTxForStruk) return;
-  getStrukBlob(function(blob){
-    var file=new File([blob],'Struk_'+lastTxForStruk.id+'.png',{type:'image/png'});
-    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-      navigator.share({
-        title:'Struk Penjualan - '+(S.config.namaKios||'Kios'),
-        text:'Struk penjualan '+lastTxForStruk.id,
-        files:[file]
-      }).catch(function(err){fallbackShareWA()});
-    } else {
-      fallbackShareWA();
-    }
-  });
+  var canvas=renderStrukToCanvas(lastTxForStruk);
+  var dataUrl=canvas.toDataURL('image/png');
+  var filename='Struk_'+lastTxForStruk.id+'.png';
+  if(window.AndroidStorage && window.AndroidStorage.shareImage){
+    window.AndroidStorage.shareImage(dataUrl, filename);
+  } else {
+    getStrukBlob(function(blob){
+      var file=new File([blob],filename,{type:'image/png'});
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({
+          title:'Struk Penjualan - '+(S.config.namaKios||'Kios'),
+          text:'Struk penjualan '+lastTxForStruk.id,
+          files:[file]
+        }).catch(function(err){fallbackShareWA()});
+      } else {
+        fallbackShareWA();
+      }
+    });
+  }
 }
 
 function fallbackShareWA(){
@@ -1845,20 +1852,25 @@ function downloadCaptureImage(){
 
 function shareCaptureImageWA(){
   var canvas = document.getElementById('capture-canvas');
-  canvas.toBlob(function(blob){
-    var filename = (lastCaptureType === 'laporan' ? 'Laporan_Keuangan.png' : 'Buku_Hutang.png');
-    var file = new File([blob], filename, {type: 'image/png'});
-    var namaKios = S.config.namaKios || 'Kios';
-    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-      navigator.share({
-        title: (lastCaptureType === 'laporan' ? 'Laporan Keuangan - ' : 'Buku Hutang - ') + namaKios,
-        text: 'Laporan keuangan ' + namaKios + ' terlampir.',
-        files:[file]
-      }).catch(function(err){fallbackCaptureShareWA()});
-    } else {
-      fallbackCaptureShareWA();
-    }
-  }, 'image/png');
+  var dataUrl = canvas.toDataURL('image/png');
+  var filename = (lastCaptureType === 'laporan' ? 'Laporan_Keuangan.png' : 'Buku_Hutang.png');
+  if(window.AndroidStorage && window.AndroidStorage.shareImage){
+    window.AndroidStorage.shareImage(dataUrl, filename);
+  } else {
+    canvas.toBlob(function(blob){
+      var file = new File([blob], filename, {type: 'image/png'});
+      var namaKios = S.config.namaKios || 'Kios';
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({
+          title: (lastCaptureType === 'laporan' ? 'Laporan Keuangan - ' : 'Buku Hutang - ') + namaKios,
+          text: 'Laporan keuangan ' + namaKios + ' terlampir.',
+          files:[file]
+        }).catch(function(err){fallbackCaptureShareWA()});
+      } else {
+        fallbackCaptureShareWA();
+      }
+    }, 'image/png');
+  }
 }
 
 function fallbackCaptureShareWA(){
