@@ -444,24 +444,53 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="mh"><h3 class="mt">Pembayaran Kasir</h3><button class="mx" onclick="closeSheet('sheet-checkout')">✕</button></div>
     <div class="mb">
       <div class="fg"><label>Total Tagihan</label><div style="font-family:'Outfit';font-size:24px;font-weight:800;color:var(--primary)" id="co-total">Rp 0</div></div>
-      <div class="fg"><label>Uang Diterima</label>
-        <input type="number" id="co-bayar" placeholder="0" oninput="hitungKembalian()">
-        <div class="qcg">
-          <button class="qcb" onclick="setQC(5000)">5rb</button>
-          <button class="qcb" onclick="setQC(10000)">10rb</button>
-          <button class="qcb" onclick="setQC(20000)">20rb</button>
-          <button class="qcb" onclick="setQC(50000)">50rb</button>
-          <button class="qcb" onclick="setQC(100000)">100rb</button>
-          <button class="qcb" onclick="setQC(150000)">150rb</button>
-          <button class="qcb" onclick="setQC(200000)">200rb</button>
-          <button class="qcb" onclick="setUangPas()">Pas</button>
+      
+      <!-- METODE PEMBAYARAN -->
+      <div class="fg" style="margin-top:10px">
+        <label>Metode Pembayaran</label>
+        <div style="display:flex;gap:10px;margin-bottom:8px;">
+          <button id="btn-pay-tunai" class="btn" style="flex:1;height:38px;background:var(--primary);color:#fff;" onclick="setPaymentMethod('tunai')">💵 Tunai (Cash)</button>
+          <button id="btn-pay-hutang" class="btn btn-s" style="flex:1;height:38px;" onclick="setPaymentMethod('hutang')">📕 Hutang (Kasbon)</button>
         </div>
       </div>
-      <div class="fg" style="margin-top:10px"><label>Kembalian</label><div style="font-family:'Outfit';font-size:20px;font-weight:800;color:var(--green)" id="co-kembalian">Rp 0</div></div>
+
+      <!-- KONTEN TUNAI -->
+      <div id="co-tunai-section">
+        <div class="fg"><label>Uang Diterima</label>
+          <input type="number" id="co-bayar" placeholder="0" oninput="hitungKembalian()">
+          <div class="qcg">
+            <button class="qcb" onclick="setQC(5000)">5rb</button>
+            <button class="qcb" onclick="setQC(10000)">10rb</button>
+            <button class="qcb" onclick="setQC(20000)">20rb</button>
+            <button class="qcb" onclick="setQC(50000)">50rb</button>
+            <button class="qcb" onclick="setQC(100000)">100rb</button>
+            <button class="qcb" onclick="setQC(150000)">150rb</button>
+            <button class="qcb" onclick="setQC(200000)">200rb</button>
+            <button class="qcb" onclick="setUangPas()">Pas</button>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:10px"><label>Kembalian</label><div style="font-family:'Outfit';font-size:20px;font-weight:800;color:var(--green)" id="co-kembalian">Rp 0</div></div>
+      </div>
+
+      <!-- KONTEN HUTANG -->
+      <div id="co-hutang-section" style="display:none;flex-direction:column;gap:8px;">
+        <div class="fg">
+          <label>Nama Pelanggan (Wajib)</label>
+          <input type="text" id="co-nama-hutang" placeholder="Contoh: Fitri Nugroho" style="height:38px;">
+        </div>
+        <div class="fg">
+          <label>Nomor WhatsApp (Opsional)</label>
+          <input type="text" id="co-wa-hutang" placeholder="Contoh: 08123456789" style="height:38px;">
+        </div>
+        <div class="fg">
+          <label>Keterangan / Catatan (Opsional)</label>
+          <input type="text" id="co-ket-hutang" placeholder="Contoh: Belanja kasbon beras" style="height:38px;">
+        </div>
+      </div>
     </div>
     <div class="mf">
       <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-checkout')">Batal</button>
-      <button class="btn" style="flex:2" onclick="selesaikanTransaksi()">Bayar Sekarang</button>
+      <button class="btn" style="flex:2" onclick="selesaikanTransaksi()">Selesaikan Transaksi</button>
     </div>
   </div>
 </div>
@@ -957,10 +986,46 @@ function adjCart(id,d){
 }
 
 /* ====== CHECKOUT ====== */
+var currentPaymentMethod = 'tunai';
+
+function setPaymentMethod(method){
+  currentPaymentMethod = method;
+  var btnTunai = document.getElementById('btn-pay-tunai');
+  var btnHutang = document.getElementById('btn-pay-hutang');
+  var sectionTunai = document.getElementById('co-tunai-section');
+  var sectionHutang = document.getElementById('co-hutang-section');
+  
+  if(method === 'tunai'){
+    btnTunai.style.background = 'var(--primary)';
+    btnTunai.style.color = '#fff';
+    btnHutang.style.background = 'var(--surface)';
+    btnHutang.style.color = 'var(--text-secondary)';
+    btnHutang.style.border = '1px solid var(--border)';
+    
+    sectionTunai.style.display = 'block';
+    sectionHutang.style.display = 'none';
+  } else {
+    btnHutang.style.background = 'var(--red)';
+    btnHutang.style.color = '#fff';
+    btnTunai.style.background = 'var(--surface)';
+    btnTunai.style.color = 'var(--text-secondary)';
+    btnTunai.style.border = '1px solid var(--border)';
+    
+    sectionTunai.style.display = 'none';
+    sectionHutang.style.display = 'flex';
+  }
+}
+
 function openCheckout(){
   var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
   document.getElementById('co-total').textContent=fR(totalP);
   document.getElementById('co-bayar').value=totalP;
+  
+  document.getElementById('co-nama-hutang').value = '';
+  document.getElementById('co-wa-hutang').value = '';
+  document.getElementById('co-ket-hutang').value = '';
+  
+  setPaymentMethod('tunai');
   hitungKembalian();
   openSheet('sheet-checkout');
 }
@@ -979,8 +1044,35 @@ function hitungKembalian(){
 function selesaikanTransaksi(){
   var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
   var totalHPP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaHpp)},0);
-  var bayar=Number(document.getElementById('co-bayar').value||0);
-  if(bayar<totalP){alert('Jumlah pembayaran kurang!');return;}
+  
+  var bayar = 0;
+  var kembalian = 0;
+  var metode = 'Tunai';
+  var namaHutang = '';
+  
+  if(currentPaymentMethod === 'tunai'){
+    bayar=Number(document.getElementById('co-bayar').value||0);
+    if(bayar<totalP){alert('Jumlah pembayaran kurang!');return;}
+    kembalian=bayar-totalP;
+  } else {
+    var nama=document.getElementById('co-nama-hutang').value.trim();
+    var wa=document.getElementById('co-wa-hutang').value.trim();
+    var ket=document.getElementById('co-ket-hutang').value.trim();
+    if(!nama){alert('Nama Pelanggan wajib diisi untuk pembayaran hutang!');return;}
+    
+    metode = 'Hutang';
+    namaHutang = nama;
+    
+    // Tambah ke Buku Hutang
+    S.hutang.push({
+      id: 'H-' + Date.now(),
+      nama: nama,
+      wa: wa,
+      jumlah: totalP,
+      ket: ket || 'Belanja Kios',
+      tanggal: new Date().toISOString()
+    });
+  }
 
   // kurangi stok
   S.cart.forEach(function(ci){
@@ -996,7 +1088,9 @@ function selesaikanTransaksi(){
     totalHPP:totalHPP,
     laba:totalP-totalHPP,
     bayar:bayar,
-    kembalian:bayar-totalP
+    kembalian:kembalian,
+    metode:metode,
+    namaHutang:namaHutang
   };
 
   S.transactions.unshift(tx);
@@ -1019,6 +1113,7 @@ function renderStrukToCanvas(tx){
   // Measure height first
   var lineH=22;
   var headerH=90;
+  if(tx.metode==='Hutang' && tx.namaHutang) headerH+=20;
   var itemsH=tx.items.length*44;
   var footerH=130;
   var H=headerH+itemsH+footerH+40;
@@ -1050,6 +1145,13 @@ function renderStrukToCanvas(tx){
   ctx.font='11px "Segoe UI", sans-serif';
   ctx.fillStyle='#64748b';
   ctx.fillText(tx.id+' \u2022 '+tgl, W/2, y);
+  
+  if(tx.metode==='Hutang' && tx.namaHutang){
+    y+=18;
+    ctx.font='bold 11px "Segoe UI", sans-serif';
+    ctx.fillStyle='#ef4444';
+    ctx.fillText('PELANGGAN: '+tx.namaHutang.toUpperCase()+' (KASBON)', W/2, y);
+  }
   y+=20;
 
   // Dashed line
@@ -1092,7 +1194,11 @@ function renderStrukToCanvas(tx){
   ctx.fillStyle='#1e293b';
   ctx.fillText('Bayar', padX, y);
   ctx.textAlign='right';
-  ctx.fillText(fR(tx.bayar), W-padX, y);
+  if(tx.metode === 'Hutang'){
+    ctx.fillText('Rp 0 (Kasbon)', W-padX, y);
+  } else {
+    ctx.fillText(fR(tx.bayar), W-padX, y);
+  }
   ctx.textAlign='left';
   y+=20;
 
