@@ -1162,7 +1162,7 @@
             <div class="settings-row-left">
               <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <div>
-                <div class="settings-label">Unduh Aplikasi HP (APK v1.3)</div>
+                <div class="settings-label">Unduh Aplikasi HP (APK v1.5)</div>
                 <div class="settings-desc">Download berkas instalasi Android terbaru</div>
               </div>
             </div>
@@ -1635,7 +1635,8 @@
     function checkSecurityLock() {
       const lockOverlay = document.getElementById('lock-screen-overlay');
       if (lockOverlay) {
-        if (appState.config && appState.config.security && appState.config.security.enabled) {
+        const isUnlocked = sessionStorage.getItem('kios_pos_unlocked') === 'true';
+        if (appState.config && appState.config.security && appState.config.security.enabled && !isUnlocked) {
           lockOverlay.style.display = 'flex';
           document.getElementById('lock-kios-title').textContent = appState.config.namaKios || 'Kios Saya';
           const lockImg = document.getElementById('lock-logo-img');
@@ -1664,6 +1665,7 @@
       const validPass = sec.pass || '1234';
 
       if (u === validUser && p === validPass) {
+        sessionStorage.setItem('kios_pos_unlocked', 'true');
         document.getElementById('lock-screen-overlay').style.display = 'none';
         if (errMsg) errMsg.style.display = 'none';
         document.getElementById('login-input-pass').value = '';
@@ -2103,8 +2105,21 @@
       openSheet('sheet-receipt');
     }
 
-    // Helper: buka URL WhatsApp — gunakan api.whatsapp.com agar kompatibel di semua HP & WebView
-    function bukaWA(url) {
+    // Helper: buka URL WhatsApp via Native Android Bridge / Web Fallback
+    function bukaWA(phone, text) {
+      if (typeof AndroidStorage !== 'undefined' && typeof AndroidStorage.openWhatsApp === 'function') {
+        AndroidStorage.openWhatsApp(phone || '', text || '');
+        return;
+      }
+
+      const cleanPhone = (phone || '').replace(/[^0-9]/g, '').replace(/^0/, '62');
+      let url = '';
+      if (cleanPhone) {
+        url = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(text || '')}`;
+      } else {
+        url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text || '')}`;
+      }
+
       try {
         const w = window.open(url, '_blank');
         if (!w || w.closed || typeof w.closed === 'undefined') {
@@ -2185,7 +2200,7 @@
       setTimeout(() => {
         alert('Gambar struk (.png) BERHASIL DISIMPAN ke Galeri HP Anda!\n\nSilakan pilih kontak pelanggan di WhatsApp lalu kirim gambar struk dari galeri tersebut.');
         // Buka WhatsApp tanpa teks agar user bisa pilih kontak dan lampirkan gambar dari galeri
-        bukaWA('https://api.whatsapp.com/send');
+        bukaWA('', '');
       }, 600);
     }
 
@@ -2207,7 +2222,7 @@
       text += `Kembali: ${formatRupiah(tx.kembalian)}\n\n`;
       text += `_Terima kasih telah berbelanja!_ 🙏`;
 
-      bukaWA('https://api.whatsapp.com/send?text=' + encodeURIComponent(text));
+      bukaWA('', text);
     }
 
     // --- RIWAYAT VIEW (Gambar 2 style) ---
@@ -3062,10 +3077,8 @@
         alert('Nomor WA pelanggan ini belum diisi!\nEdit data hutang untuk menambahkan nomor HP/WA.');
         return;
       }
-      // Bersihkan nomor: hapus karakter non-angka, ubah awalan 0 ke 62
-      const nomorBersih = wa.replace(/[^0-9]/g, '').replace(/^0/, '62');
       const text = `Halo Bpk/Ibu *${nama}*,\n\nKami dari *${appState.config.namaKios || 'Kios'}* ingin mengingatkan tagihan belanja Anda sebesar *${formatRupiah(jumlah)}*.\n\nMohon untuk dapat segera diselesaikan. Terima kasih banyak! 🙏`;
-      bukaWA(`https://api.whatsapp.com/send?phone=${nomorBersih}&text=${encodeURIComponent(text)}`);
+      bukaWA(wa, text);
     }
 
     function exportHutangPDF() {
