@@ -1115,7 +1115,7 @@
         <h3 class="sheet-title">Profil & Kios</h3>
         <button onclick="closeSheet('sheet-profile')" style="background:none; border:none; color:var(--primary); font-weight:700;">Selesai</button>
       </div>
-      <div style="padding: 20px; flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+      <div style="padding: 20px; flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:14px;">
         <div class="form-field">
           <label>Nama Kios</label>
           <input type="text" id="set-nama-kios" placeholder="Kios Saya" oninput="simpanConfig()">
@@ -1135,6 +1135,71 @@
             <button class="btn btn-secondary" style="height: 40px; padding: 0 14px; font-size: 13px;" onclick="document.getElementById('set-logo-kios').click()">Pilih Logo</button>
             <button class="btn btn-danger" id="btn-hapus-logo" style="height: 40px; padding: 0 14px; font-size: 13px; display: none;" onclick="hapusLogo()">Hapus</button>
           </div>
+        </div>
+
+        <!-- FITUR TERBARU: KEAMANAN & PENGATURAN DATAPROFIL -->
+        <div style="border-top:1px dashed var(--border); margin-top:10px; padding-top:14px;">
+          <div class="settings-group-title" style="margin-bottom:8px;">Keamanan & Fitur Baru</div>
+          
+          <div class="settings-row" onclick="openSecuritySheet()" style="margin-bottom:8px;">
+            <div class="settings-row-left">
+              <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div>
+                <div class="settings-label">Keamanan Toko (User & Password)</div>
+                <div class="settings-desc" id="settings-sec-status-modal">Proteksi PIN / Password masuk aplikasi</div>
+              </div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="settings-row" onclick="window.open('BukuKasKios.apk', '_blank')" style="margin-bottom:8px;">
+            <div class="settings-row-left">
+              <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <div>
+                <div class="settings-label">Unduh Aplikasi HP (APK v1.2)</div>
+                <div class="settings-desc">Download berkas instalasi Android terbaru</div>
+              </div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="settings-row" onclick="backupData()" style="margin-bottom:8px;">
+            <div class="settings-row-left">
+              <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <div>
+                <div class="settings-label">Cadangkan Data (Backup)</div>
+                <div class="settings-desc">Simpan semua transaksi & produk ke file</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-row" onclick="document.getElementById('restore-file-input-modal').click()" style="margin-bottom:8px;">
+            <div class="settings-row-left">
+              <svg class="settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <div>
+                <div class="settings-label">Pulihkan Data (Restore)</div>
+                <div class="settings-desc">Unggah file cadangan saat ganti HP</div>
+              </div>
+            </div>
+            <input type="file" id="restore-file-input-modal" accept=".json" style="display:none;" onchange="restoreData(this)">
+          </div>
+
+          <div class="settings-row" onclick="resetAplikasi()" style="margin-top: 16px; border-color: rgba(217,56,56,0.15);">
+            <div class="settings-row-left">
+              <svg style="color:var(--red);" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              <div>
+                <div class="settings-label" style="color:var(--red);">Reset Aplikasi</div>
+                <div class="settings-desc">Hapus permanen seluruh data</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER HAK CIPTA -->
+        <div style="margin-top: 16px; margin-bottom: 12px; text-align: center; font-size: 11px; color: var(--text-muted); line-height: 1.6; border-top: 1px dashed var(--border); padding-top: 14px;">
+          <div style="font-weight: 700; color: var(--text-secondary);">©2026 Hen wani Kami Membumi</div>
+          <div>Develop by <strong style="color: var(--primary);">Enterdie</strong> &bull; Original concept by <strong style="color: var(--text-secondary);">YKaroma</strong></div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">KKN UMK Mama-Mama Papua FEB UNCEN</div>
         </div>
       </div>
   <!-- ====================================
@@ -1547,16 +1612,18 @@
     }
 
     function updateSecurityStatusUI() {
-      const el = document.getElementById('settings-sec-status');
-      if (el) {
-        if (appState.config.security && appState.config.security.enabled) {
-          el.textContent = `Aktif (User: ${appState.config.security.user || 'admin'})`;
-          el.style.color = 'var(--primary)';
-        } else {
-          el.textContent = 'Proteksi PIN / Password belum aktif';
-          el.style.color = 'var(--text-secondary)';
+      ['settings-sec-status', 'settings-sec-status-modal'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (appState.config.security && appState.config.security.enabled) {
+            el.textContent = `Aktif (User: ${appState.config.security.user || 'admin'})`;
+            el.style.color = 'var(--primary)';
+          } else {
+            el.textContent = 'Proteksi PIN / Password belum aktif';
+            el.style.color = 'var(--text-secondary)';
+          }
         }
-      }
+      });
     }
 
     function checkSecurityLock() {
