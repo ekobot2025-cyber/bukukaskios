@@ -816,9 +816,15 @@
 
       <!-- 1. VIEW: KASIR -->
       <div class="view-panel active" id="view-kasir">
-        <div class="search-wrapper">
-          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="kasir-search" class="search-input" placeholder="Cari produk..." oninput="renderKasir()">
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div class="search-wrapper" style="flex:1; margin-bottom:0;">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="kasir-search" class="search-input" placeholder="Cari produk..." oninput="renderKasir()">
+          </div>
+          <button class="btn" style="height:44px; padding:0 14px; font-size:13px; font-weight:700; flex-shrink:0; display:flex; align-items:center; gap:4px; border-radius:12px;" onclick="openProdukSheet(null)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            + Produk
+          </button>
         </div>
         
         <div class="p-grid" id="kasir-p-grid">
@@ -1052,7 +1058,7 @@
         <!-- Footer Hak Cipta & Pengembang -->
         <div style="margin-top: 32px; margin-bottom: 28px; text-align: center; font-size: 11px; color: var(--text-muted); line-height: 1.6; border-top: 1px dashed var(--border); padding-top: 20px;">
           <div style="font-weight: 700; color: var(--text-secondary);">©2026 Hen wani Kami Membumi</div>
-          <div>Develop by <strong style="color: var(--primary);">Enterdie</strong> &bull; Original concept by <strong style="color: var(--text-secondary);">YKaroma</strong></div>
+          <div>Develop by <a href="https://www.linkedin.com/in/papedatimur" target="_blank" style="color: var(--primary); text-decoration: underline; font-weight: 700;">Enterdie</a> &bull; Original concept by <a href="https://www.instagram.com/karomayulianti" target="_blank" style="color: var(--text-secondary); text-decoration: underline; font-weight: 700;">YKaroma</a></div>
           <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">KKN UMK Mama-Mama Papua FEB UNCEN</div>
         </div>
       </div>
@@ -1198,7 +1204,7 @@
         <!-- FOOTER HAK CIPTA -->
         <div style="margin-top: 16px; margin-bottom: 12px; text-align: center; font-size: 11px; color: var(--text-muted); line-height: 1.6; border-top: 1px dashed var(--border); padding-top: 14px;">
           <div style="font-weight: 700; color: var(--text-secondary);">©2026 Hen wani Kami Membumi</div>
-          <div>Develop by <strong style="color: var(--primary);">Enterdie</strong> &bull; Original concept by <strong style="color: var(--text-secondary);">YKaroma</strong></div>
+          <div>Develop by <a href="https://www.linkedin.com/in/papedatimur" target="_blank" style="color: var(--primary); text-decoration: underline; font-weight: 700;">Enterdie</a> &bull; Original concept by <a href="https://www.instagram.com/karomayulianti" target="_blank" style="color: var(--text-secondary); text-decoration: underline; font-weight: 700;">YKaroma</a></div>
           <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">KKN UMK Mama-Mama Papua FEB UNCEN</div>
         </div>
       </div>
@@ -1771,6 +1777,18 @@
       const grid = document.getElementById('kasir-p-grid');
       grid.innerHTML = '';
 
+      if (!appState.produk || appState.produk.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding: 40px 20px; color: var(--text-secondary); background:var(--surface); border:1px dashed var(--border); border-radius:18px;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom:12px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><line x1="12" y1="12" x2="12" y2="22.08"/><line x1="12" y1="12" x2="21" y2="6.96"/><line x1="12" y1="12" x2="3" y2="6.96"/></svg>
+            <div style="font-weight:700; font-size:16px; color:var(--text); margin-bottom:4px;">Belum Ada Produk</div>
+            <div style="font-size:12px; margin-bottom:16px;">Tambahkan barang/produk jualan Anda ke katalog</div>
+            <button class="btn" style="height:42px; padding:0 20px; font-size:13px; font-weight:700;" onclick="openProdukSheet(null)">+ Tambah Produk Baru</button>
+          </div>
+        `;
+        return;
+      }
+
       appState.produk.forEach(p => {
         if (p.nama.toLowerCase().includes(query)) {
           const currentStock = calculateRealtimeStock(p.id);
@@ -2085,9 +2103,16 @@
       openSheet('sheet-receipt');
     }
 
-    // Helper: buka URL WhatsApp — gunakan location.href agar selalu berfungsi di HP
+    // Helper: buka URL WhatsApp — gunakan api.whatsapp.com agar kompatibel di semua HP & WebView
     function bukaWA(url) {
-      window.location.href = url;
+      try {
+        const w = window.open(url, '_blank');
+        if (!w || w.closed || typeof w.closed === 'undefined') {
+          window.location.href = url;
+        }
+      } catch (e) {
+        window.location.href = url;
+      }
     }
 
     // Capture struk sebagai gambar PNG lalu share via WhatsApp
@@ -2160,7 +2185,7 @@
       setTimeout(() => {
         alert('Gambar struk (.png) BERHASIL DISIMPAN ke Galeri HP Anda!\n\nSilakan pilih kontak pelanggan di WhatsApp lalu kirim gambar struk dari galeri tersebut.');
         // Buka WhatsApp tanpa teks agar user bisa pilih kontak dan lampirkan gambar dari galeri
-        bukaWA('https://wa.me/');
+        bukaWA('https://api.whatsapp.com/send');
       }, 600);
     }
 
@@ -2182,7 +2207,7 @@
       text += `Kembali: ${formatRupiah(tx.kembalian)}\n\n`;
       text += `_Terima kasih telah berbelanja!_ 🙏`;
 
-      bukaWA('https://wa.me/?text=' + encodeURIComponent(text));
+      bukaWA('https://api.whatsapp.com/send?text=' + encodeURIComponent(text));
     }
 
     // --- RIWAYAT VIEW (Gambar 2 style) ---
@@ -2385,6 +2410,7 @@
           p.stokAwal = stokAwal;
           p.satuan = satuan;
           p.imgBase64 = tempProductImageBase64;
+          alert(`Produk "${nama}" berhasil diperbarui!`);
         }
       } else {
         appState.produk.push({
@@ -2396,6 +2422,7 @@
           satuan,
           imgBase64: tempProductImageBase64
         });
+        alert(`Produk "${nama}" berhasil ditambahkan ke katalog!`);
       }
 
       saveState();
@@ -3032,13 +3059,13 @@
 
     function tagihWA(wa, nama, jumlah) {
       if(!wa || wa.trim() === '') { 
-        alert('Nomor WA pelanggan ini belum diisi!\nEdit data hutang untuk menambahkan nomor HP.');
+        alert('Nomor WA pelanggan ini belum diisi!\nEdit data hutang untuk menambahkan nomor HP/WA.');
         return;
       }
       // Bersihkan nomor: hapus karakter non-angka, ubah awalan 0 ke 62
       const nomorBersih = wa.replace(/[^0-9]/g, '').replace(/^0/, '62');
-      const text = `Halo Bpk/Ibu *${nama}*,\n\nKami dari *${appState.config.namaKios || 'Kios'}* ingin mengingatkan tagihan belanja Anda sebesar *${formatRupiah(jumlah)}*.\n\nMohon untuk segera diselesaikan. Terima kasih! 🙏`;
-      bukaWA(`https://wa.me/${nomorBersih}?text=${encodeURIComponent(text)}`);
+      const text = `Halo Bpk/Ibu *${nama}*,\n\nKami dari *${appState.config.namaKios || 'Kios'}* ingin mengingatkan tagihan belanja Anda sebesar *${formatRupiah(jumlah)}*.\n\nMohon untuk dapat segera diselesaikan. Terima kasih banyak! 🙏`;
+      bukaWA(`https://api.whatsapp.com/send?phone=${nomorBersih}&text=${encodeURIComponent(text)}`);
     }
 
     function exportHutangPDF() {
