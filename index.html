@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-:root{--primary:#2563eb;--primary-hover:#1d4ed8;--primary-light:#dbeafe;--bg:#f8fafc;--surface:#ffffff;--text:#0f172a;--text-secondary:#64748b;--border:#e2e8f0;--green:#10b981;--green-light:#d1fae5;--red:#ef4444;--red-light:#fee2e2;--orange:#f59e0b;--orange-light:#fef3c7;--card-shadow:0 4px 12px rgba(0,0,0,.05);--header-bg:rgba(255,255,255,.88)}
-[data-theme="dark"]{--primary:#3b82f6;--primary-hover:#60a5fa;--primary-light:#1e3a8a;--bg:#0f172a;--surface:#1e293b;--text:#f8fafc;--text-secondary:#94a3b8;--border:#334155;--green:#34d399;--green-light:#064e3b;--red:#f87171;--red-light:#7f1d1d;--orange:#fbbf24;--orange-light:#78350f;--card-shadow:0 4px 12px rgba(0,0,0,.3);--header-bg:rgba(30,41,59,.88)}
+:root{--primary:#059669;--primary-hover:#047857;--primary-light:#ecfdf5;--bg:#f4fbf7;--surface:#ffffff;--text:#0f172a;--text-secondary:#64748b;--border:#e2e8f0;--green:#10b981;--green-light:#d1fae5;--red:#ef4444;--red-light:#fee2e2;--orange:#ea580c;--orange-light:#ffedd5;--card-shadow:0 4px 16px rgba(5,150,105,.04);--header-bg:rgba(255,255,255,.9)}
+[data-theme="dark"]{--primary:#10b981;--primary-hover:#34d399;--primary-light:#064e3b;--bg:#0b0f17;--surface:#151e2e;--text:#f8fafc;--text-secondary:#94a3b8;--border:#243249;--green:#34d399;--green-light:#064e3b;--red:#f87171;--red-light:#7f1d1d;--orange:#f97316;--orange-light:#7c2d12;--card-shadow:0 4px 16px rgba(0,0,0,.3);--header-bg:rgba(21,30,46,.9)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;min-height:100vh;line-height:1.5}
 .app{width:100%;max-width:480px;background:var(--bg);display:flex;flex-direction:column;min-height:100vh;position:relative;padding-bottom:90px;box-shadow:0 0 40px rgba(0,0,0,.08)}
@@ -55,7 +55,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .psb{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--primary-light);color:var(--primary);align-self:flex-start;margin-top:6px}
 
 /* FLOATING CART FAB */
-.cfab{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:440px;height:52px;background:var(--primary);color:#fff;border-radius:16px;display:none;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:0 8px 24px rgba(37,99,235,.4);z-index:99;cursor:pointer;animation:su .2s ease}
+.cfab{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:440px;height:52px;background:var(--primary);color:#fff;border-radius:16px;display:none;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:0 8px 24px rgba(5,150,105,.4);z-index:99;cursor:pointer;animation:su .2s ease}
 @keyframes su{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 
 /* CARDS */
@@ -75,7 +75,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-secondary);background:none;border:none;cursor:pointer;font-size:10px;font-weight:600}
 .ni svg{width:22px;height:22px}
 .ni.active{color:var(--primary)}
-.nfab{width:52px;height:52px;border-radius:50%;background:var(--primary);border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(37,99,235,.45);cursor:pointer;flex-shrink:0;margin-top:-24px}
+.nfab{width:52px;height:52px;border-radius:50%;background:var(--primary);border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(5,150,105,.45);cursor:pointer;flex-shrink:0;margin-top:-24px}
 .nfab:active{transform:scale(.92)}
 
 /* MODAL OVERLAYS */
@@ -119,6 +119,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 /* TX LIST ITEM */
 .tx-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
 .tx-item:last-child{border-bottom:none}
+
+/* NEW REDESIGN STYLES */
+.menu-card {display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer;transition:0.15s;box-shadow:var(--card-shadow);}
+.menu-card:active {transform:scale(0.98);}
+.menu-card-left {display:flex;align-items:center;gap:12px;}
+.menu-card-icon {width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu-card-title {font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--text);}
+.menu-card-desc {font-size:11px;color:var(--text-secondary);margin-top:1px;}
+
+.group-title {font-family:'Outfit';font-weight:700;font-size:12px;color:var(--text-secondary);text-transform:uppercase;margin:18px 0 8px 0;letter-spacing:0.5px;}
+.group-title:first-of-type {margin-top:0;}
   </style>
 </head>
 <body>
@@ -135,7 +146,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <path d="M2 12h20M12 16h.01M16 16h.01M8 16h.01M12 18h.01M16 18h.01M8 18h.01"/>
         </svg>
       </div>
-      <span class="hdr-title" id="hdr-name" style="font-family:'Outfit',sans-serif; font-size:19px; font-weight:700; color:#1e293b;">Kios Saya</span>
+      <span class="hdr-title" id="hdr-name" style="font-family:'Outfit',sans-serif; font-size:19px; font-weight:700; color:var(--text);">Kios Saya</span>
     </div>
     <div class="hdr-actions" style="gap: 8px;">
       <!-- Dark/Light mode toggle -->
@@ -164,8 +175,107 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
   <div class="views">
 
-    <!-- VIEW: KASIR -->
-    <div class="vp active" id="view-kasir">
+    <!-- VIEW: DASHBOARD (BERANDA) -->
+    <div class="vp active" id="view-dashboard">
+      <!-- Welcome Card -->
+      <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:14px;box-shadow:var(--card-shadow);background:var(--surface);margin-bottom:16px;" onclick="switchTab('pengaturan')">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:#e8f7f0;color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:18px;">
+            👤
+          </div>
+          <div>
+            <div style="font-family:'Outfit';font-weight:700;font-size:15px;color:var(--text);" id="db-welcome">Selamat Datang!</div>
+            <div style="font-size:11px;color:var(--text-secondary);" id="db-subtitle">Superadmin • Pengelola Kios</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <!-- Penjualan Hari Ini -->
+      <div class="group-title">Penjualan Hari Ini</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <!-- Card 1: Omset Hari Ini -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);background:var(--surface);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e8f7f0;color:#10b981;display:flex;align-items:center;justify-content:center;font-size:16px;">
+            💰
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="db-sales-today">Rp 0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Total Penjualan</div>
+        </div>
+
+        <!-- Card 2: Profit Hari Ini -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);background:var(--surface);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#eff6ff;color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:16px;">
+            📈
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="db-profit-today">Rp 0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Profit Hari Ini</div>
+        </div>
+      </div>
+
+      <!-- Grid Menu -->
+      <div class="group-title">Menu Utama</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+        <!-- Menu 1: Produk -->
+        <div onclick="openSheet('sheet-katalog-produk')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#e8f7f0;color:#10b981;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">📦</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Produk</span>
+        </div>
+        <!-- Menu 2: Stok Masuk -->
+        <div onclick="openSheet('sheet-restock-katalog')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#eff6ff;color:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">📥</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Stok Masuk</span>
+        </div>
+        <!-- Menu 3: Stok Opname -->
+        <div onclick="openSheet('sheet-stok-opname')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#fff7ed;color:#f97316;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">⚖️</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Stok Opname</span>
+        </div>
+        <!-- Menu 4: Riwayat Stok -->
+        <div onclick="openSheet('sheet-riwayat-stok')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#f5f5f5;color:#4b5563;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">📜</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Riwayat Stok</span>
+        </div>
+        <!-- Menu 5: Barang Expired -->
+        <div onclick="openSheet('sheet-expired')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#fef2f2;color:#ef4444;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">⚠️</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Expired</span>
+        </div>
+        <!-- Menu 6: Kategori -->
+        <div onclick="openSheet('sheet-kategori')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#fae8ff;color:#c084fc;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">🏷️</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Kategori</span>
+        </div>
+        <!-- Menu 7: Satuan -->
+        <div onclick="openSheet('sheet-satuan')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#e0e7ff;color:#6366f1;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">📏</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Satuan</span>
+        </div>
+        <!-- Menu 8: Kalkulator -->
+        <div onclick="openSheet('sheet-kalkulator')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#ecfeff;color:#0891b2;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">🧮</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Kalkulator</span>
+        </div>
+        <!-- Menu 9: Cek Harga -->
+        <div onclick="openSheet('sheet-cek-harga')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#fff1f2;color:#f43f5e;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">🔍</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Cek Harga</span>
+        </div>
+        <!-- Menu 10: Pelanggan -->
+        <div onclick="openSheet('sheet-lap-piutang')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#fffbeb;color:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">👥</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Pelanggan</span>
+        </div>
+        <!-- Menu 11: Supplier -->
+        <div onclick="openSheet('sheet-supplier')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;box-shadow:var(--card-shadow);text-align:center;">
+          <div style="width:34px;height:34px;border-radius:8px;background:#f0fdf4;color:#16a34a;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:6px;">🏬</div>
+          <span style="font-size:10px;font-weight:700;color:var(--text);line-height:1.2;">Supplier</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: KASIR (POS Kios) -->
+    <div class="vp" id="view-kasir">
       <div class="sw" style="display:flex;align-items:center;position:relative;">
         <svg class="sic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="kasir-search" class="si" placeholder="Cari barang..." oninput="renderKasir()" style="padding-right:48px; border-radius:14px; border:1px solid #cbd5e1; height:46px;">
@@ -173,8 +283,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         </button>
       </div>
-      <div class="pg" id="kasir-grid"></div>
-      <div class="cfab" id="cart-fab" onclick="openCart()">
+      <div class="pg" id="kasir-grid" style="margin-bottom:80px;"></div>
+      <div class="cfab" id="cart-fab" onclick="openCart()" style="position:fixed; bottom:84px; left:50%; transform:translateX(-50%); z-index:99; width: calc(100% - 32px); max-width:440px;">
         <div style="display:flex;align-items:center;gap:8px">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span id="cart-badge" style="background:#fff;color:var(--primary);font-weight:800;font-size:12px;padding:2px 8px;border-radius:12px">0</span>
@@ -186,52 +296,36 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <!-- VIEW: TRANSAKSI -->
     <div class="vp" id="view-riwayat">
       <h3 style="font-family:'Outfit';font-size:18px;margin-bottom:12px">Riwayat Transaksi</h3>
-      <div class="fchips" id="riwayat-filter-chips">
+      <div class="fchips" id="riwayat-filter-chips" style="margin-bottom:16px;">
         <button class="fchip active" onclick="setRiwayatFilter('all',this)">Semua</button>
         <button class="fchip" onclick="setRiwayatFilter('today',this)">Hari Ini</button>
         <button class="fchip" onclick="setRiwayatFilter('7d',this)">7 Hari</button>
         <button class="fchip" onclick="setRiwayatFilter('30d',this)">30 Hari</button>
       </div>
-      <div id="riwayat-list"></div>
-    </div>
-
-    <!-- VIEW: HUTANG -->
-    <div class="vp" id="view-hutang">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h3 style="font-family:'Outfit';font-size:18px">Buku Hutang</h3>
-        <button class="btn" style="height:36px;padding:0 14px;font-size:12px;width:auto" onclick="openSheet('sheet-hutang')">+ Catat Hutang</button>
-      </div>
-      <div class="card">
-        <div class="sl">Total Piutang Belum Dibayar</div>
-        <div class="sv" id="hutang-total" style="color:var(--red)">Rp 0</div>
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <button class="btn btn-g" style="height:34px;font-size:12px;flex:1;" onclick="shareHutangImage()">📷 Bagikan Gambar Hutang</button>
-          <button class="btn btn-s" style="height:34px;font-size:12px;flex:1;" onclick="exportHutangPDF()">📄 Ekspor PDF Buku Hutang</button>
-        </div>
-      </div>
-      <div id="hutang-list"></div>
+      <div id="riwayat-list" style="display:flex;flex-direction:column;gap:12px;"></div>
     </div>
 
     <!-- VIEW: LAPORAN -->
     <div class="vp" id="view-laporan">
-      <h3 id="lap-title-text" style="font-family:'Outfit';font-size:18px;margin-bottom:12px">Laporan Keuangan Kios</h3>
-      <div class="fchips" id="laporan-filter-chips">
-        <button class="fchip active" onclick="setLaporanFilter('all',this)">Semua</button>
+      <h3 style="font-family:'Outfit';font-size:18px;margin-bottom:12px">Pusat Laporan &amp; Analitik</h3>
+      
+      <!-- FILTER CHIPS -->
+      <div class="fchips" id="laporan-filter-chips" style="margin-bottom:12px;">
+        <button class="fchip active" onclick="setLaporanFilter('all',this)">Semua Periode</button>
         <button class="fchip" onclick="setLaporanFilter('today',this)">Hari Ini</button>
         <button class="fchip" onclick="setLaporanFilter('7d',this)">7 Hari</button>
         <button class="fchip" onclick="setLaporanFilter('30d',this)">30 Hari</button>
       </div>
-      <button class="btn btn-o" style="height:42px;font-size:13px;margin-bottom:12px;box-shadow:0 4px 10px rgba(245,158,11,.2);" onclick="openSheet('sheet-pengeluaran')">💸 Catat Pengeluaran Kios (Beban)</button>
 
       <!-- RINGKASAN KEUANGAN DASHBOARD -->
-      <div style="font-family:'Outfit';font-weight:700;font-size:14px;color:#64748b;text-transform:uppercase;margin: 8px 0 10px 0;letter-spacing:0.5px;">Ringkasan Keuangan</div>
+      <div class="group-title">Ringkasan Keuangan</div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
         <!-- Card 1: Total Penjualan -->
         <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);">
           <div style="width:32px;height:32px;border-radius:8px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
           </div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-penjualan">Rp 0</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="dash-penjualan">Rp 0</div>
           <div style="font-size:11px;color:#64748b;font-weight:600;">Total Penjualan</div>
         </div>
 
@@ -240,7 +334,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="width:32px;height:32px;border-radius:8px;background:#f0fdf4;color:#16a34a;display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-transaksi">0</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="dash-transaksi">0</div>
           <div style="font-size:11px;color:#64748b;font-weight:600;">Total Transaksi</div>
         </div>
 
@@ -249,7 +343,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="width:32px;height:32px;border-radius:8px;background:#fff7ed;color:#ea580c;display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
           </div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-terjual">0</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="dash-terjual">0</div>
           <div style="font-size:11px;color:#64748b;font-weight:600;">Barang Terjual</div>
         </div>
 
@@ -258,13 +352,452 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="width:32px;height:32px;border-radius:8px;background:#ecfeff;color:#0891b2;display:flex;align-items:center;justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-laba">Rp 0</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-top:4px;" id="dash-laba">Rp 0</div>
           <div style="font-size:11px;color:#64748b;font-weight:600;">Laba Bersih</div>
         </div>
       </div>
 
-      <!-- LAPORAN LABA RUGI -->
-      <div class="card" style="margin-bottom:12px">
+      <!-- LIST MENU LAPORAN -->
+      <div class="group-title">Laporan Akuntansi &amp; Kios</div>
+      
+      <div class="menu-card" onclick="openSheet('sheet-lap-labarugi')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#eff6ff;color:#2563eb;">📊</div>
+          <div>
+            <div class="menu-card-title">Laporan Laba Rugi</div>
+            <div class="menu-card-desc">Pendapatan, HPP modal, beban, &amp; profit.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="openSheet('sheet-lap-neraca')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#f0fdf4;color:#16a34a;">📋</div>
+          <div>
+            <div class="menu-card-title">Laporan Neraca</div>
+            <div class="menu-card-desc">Aset lancar/stok vs Kewajiban &amp; Modal.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="openSheet('sheet-lap-aruskas')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#fef3c7;color:#d97706;">💰</div>
+          <div>
+            <div class="menu-card-title">Laporan Arus Kas</div>
+            <div class="menu-card-desc">Cash Flow Operasi, Investasi, &amp; Pendanaan.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="openSheet('sheet-lap-piutang')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#fee2e2;color:#ef4444;">📕</div>
+          <div>
+            <div class="menu-card-title">Buku Hutang (Piutang Kios)</div>
+            <div class="menu-card-desc">Rekapitulasi kasbon pelanggan &amp; tagih WA.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="openSheet('sheet-pengeluaran')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#f5f5f5;color:#4b5563;">💸</div>
+          <div>
+            <div class="menu-card-title">Buku Pengeluaran (Beban Kios)</div>
+            <div class="menu-card-desc">Catat &amp; kelola biaya operasional umum.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+    </div>
+
+    <!-- VIEW: PENGATURAN -->
+    <div class="vp" id="view-pengaturan">
+      <h3 style="font-family:'Outfit';font-size:18px;margin-bottom:12px">Pengaturan</h3>
+      
+      <div class="group-title">Profil &amp; Toko</div>
+      
+      <div class="menu-card" onclick="openSheet('sheet-profile')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#eff6ff;color:#2563eb;">⚙️</div>
+          <div>
+            <div class="menu-card-title">Profil Kios</div>
+            <div class="menu-card-desc">Ubah nama kios, modal awal, &amp; logo usaha.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="group-title">Keamanan &amp; Tampilan</div>
+
+      <div class="menu-card" onclick="openSheet('sheet-security')">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#fee2e2;color:#ef4444;">🔒</div>
+          <div>
+            <div class="menu-card-title">Kunci PIN Aplikasi</div>
+            <div class="menu-card-desc">Gunakan username &amp; PIN pengaman akses.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="toggleTheme()">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#fef3c7;color:#d97706;">☀️</div>
+          <div>
+            <div class="menu-card-title">Tema Aplikasi</div>
+            <div class="menu-card-desc">Beralih antara Mode Terang &amp; Gelap.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="group-title">Manajemen Data &amp; Database</div>
+
+      <div class="menu-card" onclick="backupData()">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#e0f2fe;color:#0369a1;">📥</div>
+          <div>
+            <div class="menu-card-title">Backup Database</div>
+            <div class="menu-card-desc">Simpan cadangan data (JSON) ke memori HP.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+
+      <div class="menu-card" onclick="triggerRestore()">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#d1fae5;color:#065f46;">📤</div>
+          <div>
+            <div class="menu-card-title">Restore Database</div>
+            <div class="menu-card-desc">Pulihkan data pembukuan dari file JSON.</div>
+          </div>
+        </div>
+        <div style="color:var(--text-secondary);font-weight:bold;">➔</div>
+      </div>
+      <input type="file" id="restore-file-input" accept=".json" style="display:none" onchange="restoreData(event)">
+
+      <div class="menu-card" onclick="resetAplikasi()" style="border:1px solid #fee2e2;">
+        <div class="menu-card-left">
+          <div class="menu-card-icon" style="background:#fef2f2;color:#ef4444;">🗑️</div>
+          <div>
+            <div class="menu-card-title" style="color:#ef4444;">Reset Semua Data</div>
+            <div class="menu-card-desc" style="color:#f87171;">Hapus semua produk &amp; pembukuan (Permanen).</div>
+          </div>
+        </div>
+        <div style="color:#ef4444;font-weight:bold;">➔</div>
+      </div>
+
+      <footer class="foot">
+        ©2026 Hen wani Kami Membumi • Develop by <a href="https://www.linkedin.com/in/papedatimur" target="_blank">Enterdie</a> • Original concept by <a href="https://www.instagram.com/karomayulianti" target="_blank">YKaroma</a><br>KKN UMK Mama-Mama Papua FEB UNCEN
+      </footer>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="nav">
+    <button class="ni active" id="tab-dashboard" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"/>
+        <rect x="14" y="3" width="7" height="5"/>
+        <rect x="14" y="12" width="7" height="9"/>
+        <rect x="3" y="16" width="7" height="5"/>
+      </svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="ni" id="tab-kasir" onclick="switchTab('kasir')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="12" width="20" height="9" rx="2"/>
+        <rect x="6" y="3" width="12" height="7" rx="1"/>
+        <path d="M2 12h20M12 16h.01M16 16h.01M8 16h.01M12 18h.01M16 18h.01M8 18h.01"/>
+      </svg>
+      <span>Kasir</span>
+    </button>
+    <button class="nfab" id="btn-fab-center" onclick="openSheet('sheet-quick-add')" title="Tambah Cepat">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </button>
+    <button class="ni" id="tab-riwayat" onclick="switchTab('riwayat')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+      </svg>
+      <span>Transaksi</span>
+    </button>
+    <button class="ni" id="tab-laporan" onclick="switchTab('laporan')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <line x1="18" y1="20" x2="18" y2="10"/>
+        <line x1="12" y1="20" x2="12" y2="4"/>
+        <line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+      <span>Laporan</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ===================== MODALS ===================== -->
+
+<!-- MODAL: QUICK ADD MENU -->
+<div class="mo" id="sheet-quick-add">
+  <div class="md" style="max-width: 320px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Tambah Cepat</h3>
+      <button class="mx" onclick="closeSheet('sheet-quick-add')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; display:flex; flex-direction:column; gap:10px;">
+      <button class="btn" style="height:44px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--primary);" onclick="closeSheet('sheet-quick-add');openProdukSheet(null)">
+        <span>📦</span> Tambah Produk Baru
+      </button>
+      <button class="btn btn-g" style="height:44px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;" onclick="closeSheet('sheet-quick-add');openSheet('sheet-pengeluaran')">
+        <span>💵</span> Catat Pengeluaran Kios
+      </button>
+      <button class="btn btn-o" style="height:44px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;background:#f97316;color:#fff;border:none;" onclick="closeSheet('sheet-quick-add');openSheet('sheet-lap-piutang')">
+        <span>👥</span> Catat Hutang Baru
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: KATALOG PRODUK TOKO -->
+<div class="mo" id="sheet-katalog-produk">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Katalog Produk Toko</h3>
+      <button class="mx" onclick="closeSheet('sheet-katalog-produk')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto;">
+      <div class="sw" style="display:flex;align-items:center;position:relative;">
+        <svg class="sic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="katalog-search" class="si" placeholder="Cari katalog..." oninput="renderKatalogList()" style="border-radius:14px; border:1px solid #cbd5e1; height:44px;">
+      </div>
+      <button class="btn btn-g" style="height:40px; font-size:13px; margin-bottom:12px;" onclick="openProdukSheet(null)">+ Tambah Produk Baru</button>
+      <div id="katalog-list" style="display:flex;flex-direction:column;gap:10px;max-height:350px;overflow-y:auto;padding-right:2px;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-katalog-produk')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: RESTOCK KATALOG -->
+<div class="mo" id="sheet-restock-katalog">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Restock / Stok Masuk</h3>
+      <button class="mx" onclick="closeSheet('sheet-restock-katalog')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto;">
+      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Pilih salah satu produk di bawah ini untuk menambah stok masuk:</p>
+      <div id="restock-katalog-list" style="display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-restock-katalog')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: STOK OPNAME -->
+<div class="mo" id="sheet-stok-opname">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Stok Opname (Fisik)</h3>
+      <button class="mx" onclick="closeSheet('sheet-stok-opname')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto;">
+      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Gunakan modul ini untuk menyesuaikan jumlah stok fisik di toko Anda secara langsung:</p>
+      <div id="opname-list" style="display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-stok-opname')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: RIWAYAT STOK -->
+<div class="mo" id="sheet-riwayat-stok">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Catatan Log Riwayat Stok</h3>
+      <button class="mx" onclick="closeSheet('sheet-riwayat-stok')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto;">
+      <div id="stok-log-list" style="display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-riwayat-stok')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EXPIRED -->
+<div class="mo" id="sheet-expired">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Monitoring Expired Date</h3>
+      <button class="mx" onclick="closeSheet('sheet-expired')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto;">
+      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;">Daftar produk yang mendekati atau telah melewati masa kedaluwarsa:</p>
+      <div id="expired-list" style="display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-expired')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: KATEGORI -->
+<div class="mo" id="sheet-kategori">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Daftar Kategori Produk</h3>
+      <button class="mx" onclick="closeSheet('sheet-kategori')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+      <div class="fg">
+        <label>Tambah Kategori Baru</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="new-category-name" placeholder="Contoh: Sembako / Minuman" style="flex:2;">
+          <button class="btn" style="width:auto;flex:1;height:44px;" onclick="tambahKategori()">Tambah</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">
+        <label style="font-size:11px;font-weight:700;color:var(--text-secondary);">Kategori Terdaftar</label>
+        <div id="categories-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-kategori')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SATUAN -->
+<div class="mo" id="sheet-satuan">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Daftar Satuan Barang</h3>
+      <button class="mx" onclick="closeSheet('sheet-satuan')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+      <div class="fg">
+        <label>Tambah Satuan Baru</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="new-unit-name" placeholder="Contoh: pcs / bungkus / kg" style="flex:2;">
+          <button class="btn" style="width:auto;flex:1;height:44px;" onclick="tambahSatuan()">Tambah</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">
+        <label style="font-size:11px;font-weight:700;color:var(--text-secondary);">Satuan Terdaftar</label>
+        <div id="units-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-satuan')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: KALKULATOR -->
+<div class="mo" id="sheet-kalkulator">
+  <div class="md" style="max-width: 320px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Kalkulator Kios</h3>
+      <button class="mx" onclick="closeSheet('sheet-kalkulator')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; display:flex; flex-direction:column; gap:10px; background:#1e293b; color:#fff;">
+      <div id="calc-screen" style="width:100%;height:50px;background:#0f172a;border-radius:10px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;font-size:24px;font-weight:700;font-family:monospace;overflow:hidden;letter-spacing:1px;color:#38bdf8;">0</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        <button class="btn btn-s" style="background:#475569;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('C')">C</button>
+        <button class="btn btn-s" style="background:#475569;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('del')">⌫</button>
+        <button class="btn btn-s" style="background:#475569;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('/')">/</button>
+        <button class="btn btn-o" style="border:none;height:42px;font-size:16px;" onclick="pressCalc('*')">*</button>
+        
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('7')">7</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('8')">8</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('9')">9</button>
+        <button class="btn btn-o" style="border:none;height:42px;font-size:16px;" onclick="pressCalc('-')">-</button>
+        
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('4')">4</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('5')">5</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('6')">6</button>
+        <button class="btn btn-o" style="border:none;height:42px;font-size:16px;" onclick="pressCalc('+')">+</button>
+        
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('1')">1</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('2')">2</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('3')">3</button>
+        <button class="btn btn-g" style="grid-row:span 2; height:92px; font-size:18px;" onclick="pressCalc('=')">=</button>
+        
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;grid-column:span 2;" onclick="pressCalc('0')">0</button>
+        <button class="btn btn-s" style="background:#334155;color:#fff;border:none;height:42px;font-size:16px;" onclick="pressCalc('.')">.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CEK HARGA -->
+<div class="mo" id="sheet-cek-harga">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Pengecekan Harga Barang</h3>
+      <button class="mx" onclick="closeSheet('sheet-cek-harga')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; display:flex; flex-direction:column; gap:12px;">
+      <p style="font-size:11px;color:var(--text-secondary);">Masukkan nama produk untuk mencari rincian harga beli, harga jual, margin keuntungan, dan persediaan stok:</p>
+      <div class="sw" style="display:flex;align-items:center;position:relative;margin-bottom:0;">
+        <svg class="sic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="check-price-search" class="si" placeholder="Masukkan nama barang..." oninput="renderCekHargaList()" style="border-radius:14px; border:1px solid #cbd5e1; height:44px;">
+      </div>
+      <div id="cek-harga-list" style="display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto;margin-top:6px;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-cek-harga')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SUPPLIER -->
+<div class="mo" id="sheet-supplier">
+  <div class="md" style="max-height: 90vh; max-width: 440px;">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 class="mt" style="font-family:'Outfit';">Data Supplier / Agen</h3>
+      <button class="mx" onclick="closeSheet('sheet-supplier')">✕</button>
+    </div>
+    <div class="mb" style="padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;">
+      <button class="btn btn-g" style="height:38px; font-size:12px;" onclick="openAddSupplierForm()">+ Tambah Supplier Baru</button>
+      
+      <!-- Add form inside supplier modal (toggled) -->
+      <div id="supplier-form-box" style="display:none; background:var(--bg); border:1px solid var(--border); padding:12px; border-radius:12px; flex-direction:column; gap:8px;">
+        <div class="fg"><label style="font-size:10px;">Nama Supplier</label><input type="text" id="sup-nama" placeholder="Contoh: PT. Sinar Papua" style="height:36px;font-size:12px;"></div>
+        <div class="fg"><label style="font-size:10px;">No WhatsApp</label><input type="text" id="sup-wa" placeholder="Contoh: 0812345678" style="height:36px;font-size:12px;"></div>
+        <div class="fg"><label style="font-size:10px;">Alamat / Keterangan</label><input type="text" id="sup-alamat" placeholder="Contoh: Jl. Abepura No. 10" style="height:36px;font-size:12px;"></div>
+        <div style="display:flex;gap:6px;margin-top:4px;">
+          <button class="btn btn-s" style="height:34px;font-size:11px;" onclick="toggleSupplierForm(false)">Batal</button>
+          <button class="btn" style="height:34px;font-size:11px;" onclick="simpanSupplier()">Simpan</button>
+        </div>
+      </div>
+      
+      <div id="suppliers-list" style="display:flex;flex-direction:column;gap:10px;max-height:280px;overflow-y:auto;margin-top:6px;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-supplier')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LAPORAN LABA RUGI -->
+<div class="mo" id="sheet-lap-labarugi">
+  <div class="md">
+    <div class="mh"><h3 class="mt">Laporan Laba Rugi</h3><button class="mx" onclick="closeSheet('sheet-lap-labarugi')">✕</button></div>
+    <div class="mb">
+      <div class="card" style="margin-bottom:0">
         <div style="font-family:'Outfit';font-weight:800;font-size:14px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;text-align:center">📊 Laporan Laba Rugi</div>
         <div style="font-size:11px;color:var(--text-secondary);text-align:center;margin-bottom:10px" id="lap-periode">Periode: Semua</div>
         <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
@@ -278,9 +811,24 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="border-top:2px solid var(--primary);padding-top:8px;display:flex;justify-content:space-between;font-weight:800;font-size:15px"><span>LABA BERSIH OPERASIONAL</span><span style="color:var(--green)" id="lap-laba-bersih">Rp 0</span></div>
         </div>
       </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <button class="btn btn-g" onclick="shareLaporanImage()">📷 Bagikan Gambar Laporan (WA)</button>
+        <button class="btn" onclick="exportLaporanBUMKamPDF()">📄 Ekspor Laporan PDF Kios</button>
+        <button class="btn btn-s" onclick="exportCSV()">📊 Ekspor Data Transaksi CSV</button>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-lap-labarugi')">Tutup</button>
+    </div>
+  </div>
+</div>
 
-      <!-- LAPORAN NERACA KEUANGAN -->
-      <div class="card" style="margin-bottom:12px">
+<!-- MODAL: LAPORAN NERACA -->
+<div class="mo" id="sheet-lap-neraca">
+  <div class="md">
+    <div class="mh"><h3 class="mt">Laporan Neraca</h3><button class="mx" onclick="closeSheet('sheet-lap-neraca')">✕</button></div>
+    <div class="mb">
+      <div class="card" style="margin-bottom:0">
         <div style="font-family:'Outfit';font-weight:800;font-size:14px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;text-align:center">📋 Laporan Neraca Keuangan</div>
         <div style="font-size:11px;color:var(--text-secondary);text-align:center;margin-bottom:10px" id="lap-neraca-tgl">Per Tanggal: -</div>
         <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
@@ -291,7 +839,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="display:flex;justify-content:space-between;margin-left:8px"><span>- Persediaan Dagang (Stok)</span><span style="font-weight:700" id="lap-persediaan">Rp 0</span></div>
           <div style="border-top:1px solid var(--border);padding-top:6px;display:flex;justify-content:space-between;font-weight:800"><span>TOTAL AKTIVA</span><span style="color:var(--primary)" id="lap-total-aktiva">Rp 0</span></div>
 
-          <div style="font-weight:700;color:var(--text-secondary);text-transform:uppercase;font-size:11px;margin-top:10px">KEWAJIBAN & EKUITAS (PASIVA)</div>
+          <div style="font-weight:700;color:var(--text-secondary);text-transform:uppercase;font-size:11px;margin-top:10px">KEWAJIBAN &amp; EKUITAS (PASIVA)</div>
           <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-left:4px">Kewajiban:</div>
           <div style="display:flex;justify-content:space-between;margin-left:8px"><span>- Hutang Usaha Kios</span><span style="font-weight:700" id="lap-hutang-usaha">Rp 0</span></div>
           <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-left:4px;margin-top:4px">Ekuitas Toko (Modal):</div>
@@ -300,9 +848,19 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div style="border-top:1px solid var(--border);padding-top:6px;display:flex;justify-content:space-between;font-weight:800"><span>TOTAL PASIVA</span><span style="color:var(--primary)" id="lap-total-pasiva">Rp 0</span></div>
         </div>
       </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-lap-neraca')">Tutup</button>
+    </div>
+  </div>
+</div>
 
-      <!-- LAPORAN ARUS KAS -->
-      <div class="card" style="margin-bottom:12px">
+<!-- MODAL: LAPORAN ARUS KAS -->
+<div class="mo" id="sheet-lap-aruskas">
+  <div class="md">
+    <div class="mh"><h3 class="mt">Laporan Arus Kas</h3><button class="mx" onclick="closeSheet('sheet-lap-aruskas')">✕</button></div>
+    <div class="mb">
+      <div class="card" style="margin-bottom:0">
         <div style="font-family:'Outfit';font-weight:800;font-size:14px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;text-align:center">💰 Laporan Arus Kas (Cash Flow)</div>
         <div style="font-size:11px;color:var(--text-secondary);text-align:center;margin-bottom:10px">Periode: Semua Periode</div>
         <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
@@ -326,51 +884,34 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
         </div>
       </div>
-
-      <!-- TOMBOL EKSPOR -->
-      <div class="card" style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn btn-g" onclick="shareLaporanImage()">📷 Bagikan Gambar Laporan (WA)</button>
-        <button class="btn" onclick="exportLaporanBUMKamPDF()">📄 Ekspor Laporan PDF Kios</button>
-        <button class="btn btn-s" onclick="exportCSV()">📊 Ekspor Data Transaksi CSV</button>
-      </div>
     </div>
-
-    <!-- VIEW: PENGATURAN -->
-    <div class="vp" id="view-pengaturan">
-      <h3 style="font-family:'Outfit';font-size:18px;margin-bottom:12px">Pengaturan</h3>
-      <div class="card" style="display:flex;flex-direction:column;gap:10px">
-        <button class="btn btn-s" onclick="openSheet('sheet-profile')">⚙️ Profil & Logo Kios</button>
-        <button class="btn btn-s" onclick="openSheet('sheet-pengeluaran')">💸 Catat Pengeluaran (Beban Kios)</button>
-        <button class="btn btn-s" onclick="openSheet('sheet-security')">🔒 Kunci PIN Aplikasi</button>
-        <button class="btn btn-s" onclick="backupData()">📥 Backup Data (JSON)</button>
-        <button class="btn btn-s" onclick="triggerRestore()">📤 Restore Data (JSON)</button>
-        <input type="file" id="restore-file-input" accept=".json" style="display:none" onchange="restoreData(event)">
-        <button class="btn btn-d" onclick="resetAplikasi()">🗑️ Reset Semua Data</button>
-      </div>
-      <footer class="foot">
-        ©2026 Hen wani Kami Membumi • Develop by <a href="https://www.linkedin.com/in/papedatimur" target="_blank">Enterdie</a> • Original concept by <a href="https://www.instagram.com/karomayulianti" target="_blank">YKaroma</a><br>KKN UMK Mama-Mama Papua FEB UNCEN
-      </footer>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-lap-aruskas')">Tutup</button>
     </div>
   </div>
-
-  <!-- BOTTOM NAV -->
-  <nav class="nav">
-    <button class="ni active" id="tab-kasir" onclick="switchTab('kasir')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="12" width="20" height="9" rx="2"/>
-        <rect x="6" y="3" width="12" height="7" rx="1"/>
-        <path d="M2 12h20M12 16h.01M16 16h.01M8 16h.01M12 18h.01M16 18h.01M8 18h.01"/>
-      </svg>
-      <span>Kasir</span>
-    </button>
-    <button class="ni" id="tab-riwayat" onclick="switchTab('riwayat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Transaksi</span></button>
-    <button class="nfab" id="btn-fab-center" onclick="openProdukSheet(null)" title="Tambah Produk"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-    <button class="ni" id="tab-hutang" onclick="switchTab('hutang')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg><span>Hutang</span></button>
-    <button class="ni" id="tab-laporan" onclick="switchTab('laporan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Laporan</span></button>
-  </nav>
 </div>
 
-<!-- ===================== MODALS ===================== -->
+<!-- MODAL: BUKU HUTANG DETAIL -->
+<div class="mo" id="sheet-lap-piutang">
+  <div class="md">
+    <div class="mh" style="display:flex;justify-content:space-between;align-items:center;"><h3 class="mt" style="font-family:'Outfit';">Buku Hutang &amp; Piutang</h3><button class="mx" onclick="closeSheet('sheet-lap-piutang')">✕</button></div>
+    <div class="mb">
+      <div class="card" style="margin-bottom:0">
+        <div class="sl">Total Piutang Belum Dibayar</div>
+        <div class="sv" id="hutang-total" style="color:var(--red); font-size: 22px;">Rp 0</div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-g" style="height:36px;font-size:12px;flex:1;" onclick="shareHutangImage()">📷 Bagikan Gambar (WA)</button>
+          <button class="btn btn-s" style="height:36px;font-size:12px;flex:1;" onclick="exportHutangPDF()">📄 Ekspor PDF</button>
+        </div>
+      </div>
+      <button class="btn" style="height:40px;font-size:13px;" onclick="openSheet('sheet-hutang')">+ Catat Hutang Baru</button>
+      <div id="hutang-list" style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;margin-top:4px;"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-lap-piutang')">Tutup</button>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL: TAMBAH / EDIT PRODUK -->
 <div class="mo" id="sheet-produk">
@@ -392,8 +933,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div class="fg"><label>Stok Awal</label><input type="number" id="fp-stok" placeholder="0"></div>
-        <div class="fg"><label>Satuan</label><input type="text" id="fp-satuan" placeholder="pcs / kg / bungkus"></div>
+        <div class="fg"><label>Satuan</label><input type="text" id="fp-satuan" list="list-satuan" placeholder="pcs / kg / bungkus"></div>
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="fg"><label>Kategori</label><input type="text" id="fp-kategori" list="list-kategori" placeholder="Sembako, Minuman, dll"></div>
+        <div class="fg"><label>Expired Date</label><input type="date" id="fp-expired" class="si" style="height:44px;border-radius:14px;border:1px solid #cbd5e1;padding:0 12px;width:100%;box-sizing:border-box;"></div>
+      </div>
+      <datalist id="list-kategori"></datalist>
+      <datalist id="list-satuan"></datalist>
     </div>
     <div class="mf">
       <button class="btn btn-s" style="flex:1" onclick="closeSheet('sheet-produk')">Batal</button>
@@ -424,16 +971,31 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="mo" id="sheet-cart">
   <div class="md">
     <div class="mh" style="display:flex;justify-content:space-between;align-items:center;">
-      <h3 class="mt" style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#1e293b;">Keranjang</h3>
+      <h3 class="mt" style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--text);">Keranjang Belanja</h3>
       <div style="display:flex;align-items:center;gap:12px;">
         <button onclick="clearCart()" style="background:none;border:none;color:#ef4444;font-size:14px;font-weight:700;cursor:pointer;">Hapus Semua</button>
         <button class="mx" onclick="closeSheet('sheet-cart')">✕</button>
       </div>
     </div>
-    <div class="mb" id="cart-items" style="background:#f8fafc;padding:12px;"></div>
-    <div class="mf" style="flex-direction:column;gap:10px">
-      <div style="display:flex;justify-content:space-between;width:100%;font-weight:800;font-size:16px"><span>Total:</span><span id="cart-modal-total" style="color:var(--primary)">Rp 0</span></div>
-      <button class="btn" onclick="openCheckout()">Lanjut Pembayaran ➔</button>
+    <div class="mb" id="cart-items" style="background:var(--surface);padding:0 20px;"></div>
+    <div class="mf" style="flex-direction:column;gap:10px;padding:16px 20px;">
+      <div style="display:flex;justify-content:space-between;width:100%;font-size:13px;color:var(--text-secondary);">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal" style="font-weight:700;">Rp 0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;width:100%;font-size:13px;color:var(--text-secondary);align-items:center;">
+        <span>Diskon (Potongan):</span>
+        <span style="font-weight:700;color:var(--red);cursor:pointer;" onclick="editCartDiscount()" id="cart-diskon-label">Rp 0 ✏️</span>
+      </div>
+      <div style="border-top:1px dashed var(--border);margin:4px 0;width:100%;"></div>
+      <div style="display:flex;justify-content:space-between;width:100%;font-weight:800;font-size:18px">
+        <span>Total:</span>
+        <span id="cart-modal-total" style="color:var(--primary)">Rp 0</span>
+      </div>
+      <div class="fg" style="width:100%;margin-top:6px;">
+        <input type="text" id="cart-catatan" placeholder="Catatan Transaksi (Opsional)" oninput="updateCartCatatan()" style="height:38px;font-size:12px;">
+      </div>
+      <button class="btn btn-g" style="margin-top:4px;" onclick="openCheckout()">Selesaikan Transaksi ➔</button>
     </div>
   </div>
 </div>
@@ -680,6 +1242,11 @@ function init(){
   if(!S.config) S.config={ namaKios:'Kios Saya', modalAwal:0, logo:'', security:{ enabled:false, user:'admin', pass:'1234' } };
   if(!S.config.security) S.config.security={ enabled:false, user:'admin', pass:'1234' };
   if(!S.config.logo) S.config.logo='';
+  
+  if(!S.categories) S.categories=['Makanan', 'Minuman', 'Sembako', 'Rokok', 'Lain-lain'];
+  if(!S.units) S.units=['pcs', 'kg', 'bungkus', 'pack', 'liter', 'renceng'];
+  if(!S.suppliers) S.suppliers=[];
+  if(!S.stockLogs) S.stockLogs=[];
 
   applyHeader();
 
@@ -706,7 +1273,38 @@ function applyHeader(){
   }
 }
 
-function renderAll(){ renderKasir(); renderRiwayat(); renderHutang(); renderLaporan(); }
+function renderDashboard(){
+  var subtitle = document.getElementById('db-subtitle');
+  if(subtitle) subtitle.textContent = (S.config.namaKios || 'Kios Saya') + ' • Superadmin';
+
+  var now = new Date();
+  var todayYear = now.getFullYear();
+  var todayMonth = now.getMonth();
+  var todayDate = now.getDate();
+  
+  var todayTxs = S.transactions.filter(function(tx){
+    if(!tx.timestamp) return false;
+    var d = new Date(tx.timestamp);
+    return d.getFullYear() === todayYear && d.getMonth() === todayMonth && d.getDate() === todayDate;
+  });
+
+  var totalSalesToday = todayTxs.reduce(function(s, tx){ return s + tx.total; }, 0);
+  var totalProfitToday = todayTxs.reduce(function(s, tx){ return s + (tx.laba || 0); }, 0);
+
+  var elSales = document.getElementById('db-sales-today');
+  if(elSales) elSales.textContent = fR(totalSalesToday);
+
+  var elProfit = document.getElementById('db-profit-today');
+  if(elProfit) elProfit.textContent = fR(totalProfitToday);
+}
+
+function renderAll(){
+  renderDashboard();
+  renderKasir();
+  renderRiwayat();
+  renderHutang();
+  renderLaporan();
+}
 
 /* ====== UTILS ====== */
 function fR(n){ return 'Rp '+Number(n||0).toLocaleString('id-ID'); }
@@ -724,7 +1322,44 @@ function switchTab(t){
 }
 
 /* ====== MODAL CONTROL ====== */
-var allSheets=['sheet-produk','sheet-restock','sheet-cart','sheet-checkout','sheet-struk','sheet-hutang','sheet-profile','sheet-security','sheet-login','sheet-detail-tx','sheet-capture'];
+var allSheets=['sheet-produk','sheet-restock','sheet-cart','sheet-checkout','sheet-struk','sheet-hutang','sheet-profile','sheet-security','sheet-login','sheet-detail-tx','sheet-capture','sheet-pengeluaran','sheet-lap-labarugi','sheet-lap-neraca','sheet-lap-aruskas','sheet-lap-piutang','sheet-quick-add','sheet-katalog-produk','sheet-restock-katalog','sheet-stok-opname','sheet-riwayat-stok','sheet-expired','sheet-kategori','sheet-satuan','sheet-kalkulator','sheet-cek-harga','sheet-supplier'];
+
+var cartDiskon = 0;
+var cartCatatan = '';
+
+function editCartItemPrice(id){
+  var item = S.cart.find(function(i){return i.id === id});
+  if(!item) return;
+  var p = prompt("Ubah harga jual item untuk transaksi ini:", item.hargaJual);
+  if(p != null){
+    var val = Number(p);
+    if(isNaN(val) || val < 0){
+      alert('Harga tidak valid!');
+    } else {
+      item.hargaJual = val;
+      save();
+      openCart();
+    }
+  }
+}
+
+function editCartDiscount(){
+  var subtotal=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
+  var d = prompt("Masukkan jumlah diskon potongan (Rp):", cartDiskon);
+  if(d != null){
+    var val = Number(d);
+    if(isNaN(val) || val < 0 || val > subtotal){
+      alert('Diskon tidak valid (tidak boleh negatif atau melebihi subtotal)!');
+    } else {
+      cartDiskon = val;
+      openCart();
+    }
+  }
+}
+
+function updateCartCatatan(){
+  cartCatatan = document.getElementById('cart-catatan').value;
+}
 
 function openSheet(id){
   allSheets.forEach(function(sid){
@@ -784,6 +1419,26 @@ function openProdukSheet(pid){
   prev.src='';
   document.getElementById('foto-placeholder').style.display='block';
 
+  // Populate datalists
+  var dlKat = document.getElementById('list-kategori');
+  if(dlKat) {
+    dlKat.innerHTML = '';
+    (S.categories || []).forEach(function(c){
+      var opt = document.createElement('option');
+      opt.value = c;
+      dlKat.appendChild(opt);
+    });
+  }
+  var dlSat = document.getElementById('list-satuan');
+  if(dlSat) {
+    dlSat.innerHTML = '';
+    (S.units || []).forEach(function(u){
+      var opt = document.createElement('option');
+      opt.value = u;
+      dlSat.appendChild(opt);
+    });
+  }
+
   if(pid){
     var p=S.produk.find(function(x){return x.id===pid});
     if(!p) return;
@@ -794,6 +1449,8 @@ function openProdukSheet(pid){
     document.getElementById('fp-jual').value=p.hargaJual||0;
     document.getElementById('fp-stok').value=p.stok!=null?p.stok:(p.stokAwal||0);
     document.getElementById('fp-satuan').value=p.satuan||'pcs';
+    document.getElementById('fp-kategori').value=p.kategori||'';
+    document.getElementById('fp-expired').value=p.expiredDate||'';
     document.getElementById('btn-hapus-p').style.display='block';
     if(p.foto){
       tempFotoBase64=p.foto;
@@ -809,6 +1466,8 @@ function openProdukSheet(pid){
     document.getElementById('fp-jual').value='';
     document.getElementById('fp-stok').value='';
     document.getElementById('fp-satuan').value='pcs';
+    document.getElementById('fp-kategori').value='';
+    document.getElementById('fp-expired').value='';
     document.getElementById('btn-hapus-p').style.display='none';
   }
   openSheet('sheet-produk');
@@ -821,16 +1480,19 @@ function simpanProduk(){
   var jual=Number(document.getElementById('fp-jual').value||0);
   var stok=Number(document.getElementById('fp-stok').value||0);
   var satuan=document.getElementById('fp-satuan').value.trim()||'pcs';
+  var kategori=document.getElementById('fp-kategori').value.trim()||'Lain-lain';
+  var expired=document.getElementById('fp-expired').value||'';
   if(!nama){alert('Nama produk wajib diisi!');return;}
 
   if(id){
     var p=S.produk.find(function(x){return x.id===id});
     if(p){
       p.nama=nama; p.hargaHpp=hpp; p.hargaJual=jual; p.stok=stok; p.satuan=satuan;
+      p.kategori=kategori; p.expiredDate=expired;
       if(tempFotoBase64) p.foto=tempFotoBase64;
     }
   } else {
-    S.produk.push({ id:'P-'+Date.now(), nama:nama, hargaHpp:hpp, hargaJual:jual, stok:stok, satuan:satuan, foto:tempFotoBase64||'' });
+    S.produk.push({ id:'P-'+Date.now(), nama:nama, hargaHpp:hpp, hargaJual:jual, stok:stok, satuan:satuan, foto:tempFotoBase64||'', kategori:kategori, expiredDate:expired });
   }
   save(); renderAll(); closeSheet('sheet-produk');
 }
@@ -863,6 +1525,15 @@ function simpanRestock(){
   var p=S.produk.find(function(x){return x.id===id});
   if(p){
     p.stok=(p.stok||0)+qty;
+    if(!S.stockLogs) S.stockLogs=[];
+    S.stockLogs.unshift({
+      id: 'SL-' + Date.now(),
+      timestamp: new Date().toISOString(),
+      namaProduk: p.nama,
+      type: 'Stok Masuk',
+      delta: qty,
+      sisa: p.stok
+    });
     save(); renderAll(); closeSheet('sheet-restock');
     alert('Stok '+p.nama+' berhasil ditambah '+qty+' '+p.satuan+'!');
   }
@@ -893,7 +1564,12 @@ function renderKasir(){
     } else {
       imgHtml='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>';
     }
-    card.innerHTML='<div><div class="pib">'+imgHtml+'</div><div class="pn">'+esc(p.nama)+'</div><div class="ph">Beli: '+fR(p.hargaHpp)+'</div><div class="pp">'+fR(p.hargaJual)+'</div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span class="psb">'+stk+' '+esc(p.satuan)+'</span><div style="display:flex;gap:4px"><button style="background:none;border:none;font-size:14px;cursor:pointer" onclick="event.stopPropagation();openRestock(\''+p.id+'\')" title="Restock">📦</button><button style="background:none;border:none;font-size:14px;cursor:pointer" onclick="event.stopPropagation();openProdukSheet(\''+p.id+'\')" title="Edit">✏️</button></div></div>';
+    
+    var badgeBg = stk > 0 ? '#e8f7f0' : '#fef2f2';
+    var badgeColor = stk > 0 ? '#10b981' : '#ef4444';
+    var badgeText = stk > 0 ? (stk + ' ' + esc(p.satuan)) : 'Habis';
+    
+    card.innerHTML='<div><div class="pib">'+imgHtml+'</div><div class="pn">'+esc(p.nama)+'</div><div class="ph">Beli: '+fR(p.hargaHpp)+'</div><div class="pp">'+fR(p.hargaJual)+'</div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:'+badgeBg+';color:'+badgeColor+';align-self:flex-start;margin-top:4px;">'+badgeText+'</span><div style="display:flex;gap:4px"><button style="background:none;border:none;font-size:14px;cursor:pointer" onclick="event.stopPropagation();openRestock(\''+p.id+'\')" title="Restock">📦</button><button style="background:none;border:none;font-size:14px;cursor:pointer" onclick="event.stopPropagation();openProdukSheet(\''+p.id+'\')" title="Edit">✏️</button></div></div>';
     g.appendChild(card);
   });
   updateCartFAB();
@@ -932,28 +1608,33 @@ function openCart(){
     c.innerHTML='<div style="text-align:center;padding:30px 20px;color:var(--text-secondary);font-size:14px;">Keranjang belanja masih kosong</div>';
   } else {
     S.cart.forEach(function(item){
-      var card=document.createElement('div');
-      card.style.cssText='background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:14px;margin-bottom:10px;position:relative;display:flex;flex-direction:column;gap:4px;box-shadow:var(--card-shadow);';
-      card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
-        '  <div style="font-weight:700;font-size:15px;color:var(--text);font-family:\'Outfit\',sans-serif;max-width:80%;">' + esc(item.nama) + '</div>' +
-        '  <button style="background:#fee2e2;border:none;width:28px;height:28px;border-radius:6px;color:#ef4444;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="deleteCartItem(\''+item.id+'\')" title="Hapus">' +
-        '    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
-        '  </button>' +
-        '</div>' +
-        '<div style="font-size:12px;color:var(--text-secondary);">' + item.qty + ' x ' + fR(item.hargaJual) + '</div>' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">' +
-        '  <div style="font-family:\'Outfit\',sans-serif;font-weight:800;font-size:16px;color:var(--primary);">' + fR(item.qty * item.hargaJual) + '</div>' +
-        '  <div style="display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;background:var(--bg);padding:2px;">' +
-        '    <button class="btn btn-s" style="width:28px;height:28px;border:none;border-radius:6px;background:none;font-weight:bold;color:var(--primary);font-size:16px;display:flex;align-items:center;justify-content:center;" onclick="adjCart(\''+item.id+'\',-1)">−</button>' +
-        '    <span style="font-weight:700;font-size:13px;width:30px;text-align:center;color:var(--text);">' + item.qty + '</span>' +
-        '    <button class="btn btn-s" style="width:28px;height:28px;border:none;border-radius:6px;background:none;font-weight:bold;color:var(--primary);font-size:16px;display:flex;align-items:center;justify-content:center;" onclick="adjCart(\''+item.id+'\',1)">+</button>' +
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);position:relative;';
+      row.innerHTML='<div>' +
+        '  <div style="font-weight:700;font-size:14px;color:var(--text);font-family:\'Outfit\',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px;" onclick="editCartItemPrice(\''+item.id+'\')" title="Klik untuk edit harga belanja">' +
+        '    ' + esc(item.nama) + ' <span style="font-size:10px;opacity:0.6;">✏️</span>' +
         '  </div>' +
+        '  <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">' + fR(item.hargaJual) + ' x ' + item.qty + '</div>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:12px;">' +
+        '  <button onclick="adjCart(\''+item.id+'\',-1)" style="width:26px;height:26px;border-radius:50%;border:1px solid #cbd5e1;background:#fff;color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:bold;font-size:14px;">−</button>' +
+        '  <span style="font-family:\'Outfit\',sans-serif;font-weight:700;font-size:14px;width:18px;text-align:center;color:var(--text);">' + item.qty + '</span>' +
+        '  <button onclick="adjCart(\''+item.id+'\',1)" style="width:26px;height:26px;border-radius:50%;border:1.5px solid var(--primary);background:#fff;color:var(--primary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:bold;font-size:14px;">+</button>' +
+        '  <div style="font-family:\'Outfit\',sans-serif;font-weight:800;font-size:14px;color:var(--text);margin-left:10px;width:75px;text-align:right;">' + fR(item.qty * item.hargaJual) + '</div>' +
         '</div>';
-      c.appendChild(card);
+      c.appendChild(row);
     });
   }
-  var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
-  document.getElementById('cart-modal-total').textContent=fR(totalP);
+  
+  var subtotal=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
+  var total = subtotal - cartDiskon;
+  if(total < 0) total = 0;
+  
+  document.getElementById('cart-subtotal').textContent=fR(subtotal);
+  document.getElementById('cart-diskon-label').textContent=cartDiskon > 0 ? ('- ' + fR(cartDiskon) + ' ✏️') : 'Rp 0 ✏️';
+  document.getElementById('cart-modal-total').textContent=fR(total);
+  document.getElementById('cart-catatan').value=cartCatatan;
+  
   openSheet('sheet-cart');
 }
 
@@ -1018,8 +1699,11 @@ function setPaymentMethod(method){
 
 function openCheckout(){
   var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
-  document.getElementById('co-total').textContent=fR(totalP);
-  document.getElementById('co-bayar').value=totalP;
+  var totalBill = totalP - cartDiskon;
+  if(totalBill < 0) totalBill = 0;
+  
+  document.getElementById('co-total').textContent=fR(totalBill);
+  document.getElementById('co-bayar').value=totalBill;
   
   document.getElementById('co-nama-hutang').value = '';
   document.getElementById('co-wa-hutang').value = '';
@@ -1031,12 +1715,20 @@ function openCheckout(){
 }
 
 function setQC(v){document.getElementById('co-bayar').value=v;hitungKembalian()}
-function setUangPas(){var t=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);document.getElementById('co-bayar').value=t;hitungKembalian()}
+function setUangPas(){
+  var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
+  var totalBill = totalP - cartDiskon;
+  if(totalBill < 0) totalBill = 0;
+  document.getElementById('co-bayar').value=totalBill;
+  hitungKembalian();
+}
 
 function hitungKembalian(){
   var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
+  var totalBill = totalP - cartDiskon;
+  if(totalBill < 0) totalBill = 0;
   var bayar=Number(document.getElementById('co-bayar').value||0);
-  var kem=bayar-totalP;
+  var kem=bayar-totalBill;
   document.getElementById('co-kembalian').textContent=fR(kem>0?kem:0);
   document.getElementById('co-kembalian').style.color=kem>=0?'var(--green)':'var(--red)';
 }
@@ -1044,6 +1736,8 @@ function hitungKembalian(){
 function selesaikanTransaksi(){
   var totalP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaJual)},0);
   var totalHPP=S.cart.reduce(function(s,i){return s+(i.qty*i.hargaHpp)},0);
+  var totalBill = totalP - cartDiskon;
+  if(totalBill < 0) totalBill = 0;
   
   var bayar = 0;
   var kembalian = 0;
@@ -1052,8 +1746,8 @@ function selesaikanTransaksi(){
   
   if(currentPaymentMethod === 'tunai'){
     bayar=Number(document.getElementById('co-bayar').value||0);
-    if(bayar<totalP){alert('Jumlah pembayaran kurang!');return;}
-    kembalian=bayar-totalP;
+    if(bayar<totalBill){alert('Jumlah pembayaran kurang!');return;}
+    kembalian=bayar-totalBill;
   } else {
     var nama=document.getElementById('co-nama-hutang').value.trim();
     var wa=document.getElementById('co-wa-hutang').value.trim();
@@ -1068,7 +1762,7 @@ function selesaikanTransaksi(){
       id: 'H-' + Date.now(),
       nama: nama,
       wa: wa,
-      jumlah: totalP,
+      jumlah: totalBill,
       ket: ket || 'Belanja Kios',
       tanggal: new Date().toISOString()
     });
@@ -1077,25 +1771,41 @@ function selesaikanTransaksi(){
   // kurangi stok
   S.cart.forEach(function(ci){
     var p=S.produk.find(function(x){return x.id===ci.id});
-    if(p){ p.stok=(p.stok||0)-ci.qty; if(p.stok<0) p.stok=0; }
+    if(p){
+      p.stok=(p.stok||0)-ci.qty;
+      if(p.stok<0) p.stok=0;
+      if(!S.stockLogs) S.stockLogs=[];
+      S.stockLogs.unshift({
+        id: 'SL-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        namaProduk: p.nama,
+        type: 'Penjualan',
+        delta: -ci.qty,
+        sisa: p.stok
+      });
+    }
   });
 
   var tx={
     id:'TX-'+Date.now(),
     timestamp:new Date().toISOString(),
     items:JSON.parse(JSON.stringify(S.cart)),
-    total:totalP,
+    total:totalBill,
     totalHPP:totalHPP,
-    laba:totalP-totalHPP,
+    laba:totalBill-totalHPP,
     bayar:bayar,
     kembalian:kembalian,
     metode:metode,
-    namaHutang:namaHutang
+    namaHutang:namaHutang,
+    diskon:cartDiskon,
+    catatan:cartCatatan
   };
 
   S.transactions.unshift(tx);
   lastTxForStruk=tx;
   S.cart=[];
+  cartDiskon=0;
+  cartCatatan='';
   save(); renderAll(); closeSheet('sheet-checkout');
   tampilkanStruk(tx);
 }
@@ -1284,8 +1994,8 @@ function shareStrukImageWA(){
   var canvas=renderStrukToCanvas(lastTxForStruk);
   var dataUrl=canvas.toDataURL('image/png');
   var filename='Struk_'+lastTxForStruk.id+'.png';
-  if(window.AndroidStorage && window.AndroidStorage.shareImage){
-    window.AndroidStorage.shareImage(dataUrl, filename);
+  if(typeof AndroidStorage !== 'undefined' && AndroidStorage.shareImage){
+    AndroidStorage.shareImage(dataUrl, filename);
   } else {
     getStrukBlob(function(blob){
       var file=new File([blob],filename,{type:'image/png'});
@@ -1375,18 +2085,40 @@ function renderRiwayat(){
   c.innerHTML='';
   var filtered=filterByDate(S.transactions,riwayatFilter);
   if(filtered.length===0){
-    c.innerHTML='<div class="card" style="text-align:center;color:var(--text-secondary)">Belum ada transaksi</div>';
+    c.innerHTML='<div style="text-align:center;padding:30px 20px;color:var(--text-secondary);font-size:14px;background:var(--surface);border-radius:14px;border:1px dashed var(--border);">Belum ada riwayat transaksi.</div>';
     return;
   }
+  
   filtered.forEach(function(tx){
-    var el=document.createElement('div');
-    el.className='card';
-    el.style.cursor='pointer';
-    el.onclick=function(){showDetailTx(tx.id)};
-    var tgl=new Date(tx.timestamp).toLocaleString('id-ID');
-    var itemCount=tx.items.reduce(function(s,i){return s+i.qty},0);
-    el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-weight:700;font-size:13px">'+tx.id+'</div><div style="font-size:11px;color:var(--text-secondary)">'+tgl+' • '+itemCount+' item</div></div><div style="font-family:Outfit;font-weight:800;color:var(--primary);font-size:15px">'+fR(tx.total)+'</div></div>';
-    c.appendChild(el);
+    var card=document.createElement('div');
+    card.className='card';
+    card.style.cssText='margin-bottom:0; cursor:pointer; padding:16px; border-radius:16px; border:1px solid var(--border); box-shadow:var(--card-shadow); background:var(--surface);';
+    card.onclick=function(){showDetailTx(tx.id)};
+    
+    var tgl=new Date(tx.timestamp).toLocaleString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    var itemsCount = tx.items.reduce(function(s,it){return s+it.qty},0);
+    var paymentMethod = tx.metode === 'Hutang' ? 'KASBON' : 'CASH';
+    var badgeColor = tx.metode === 'Hutang' ? 'var(--red)' : 'var(--green)';
+    var badgeBg = tx.metode === 'Hutang' ? 'var(--red-light)' : 'var(--green-light)';
+    
+    card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
+      '  <div style="display:flex;align-items:center;gap:6px;">' +
+      '    <span style="font-size:16px;">🧾</span>' +
+      '    <span style="font-family:\'Outfit\',sans-serif;font-weight:700;font-size:13px;color:var(--text);">' + tx.id + '</span>' +
+      '  </div>' +
+      '  <span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--green-light);color:var(--green);">Berhasil</span>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-end;">' +
+      '  <div>' +
+      '    <div style="font-size:12px;color:var(--text-secondary);">' + itemsCount + ' Item</div>' +
+      '    <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">' + tgl + '</div>' +
+      '  </div>' +
+      '  <div style="text-align:right;">' +
+      '    <div style="font-family:\'Outfit\',sans-serif;font-weight:800;font-size:15px;color:var(--text);">' + fR(tx.total) + '</div>' +
+      '    <span style="font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:'+badgeBg+';color:'+badgeColor+';display:inline-block;margin-top:2px;">💳 '+paymentMethod+'</span>' +
+      '  </div>' +
+      '</div>';
+    c.appendChild(card);
   });
 }
 
@@ -1420,15 +2152,25 @@ function renderHutang(){
   var el=document.getElementById('hutang-total');
   if(el) el.textContent=fR(totalH);
   if(S.hutang.length===0){
-    c.innerHTML='<div class="card" style="text-align:center;color:var(--text-secondary)">Belum ada catatan hutang</div>';
+    c.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Belum ada catatan hutang</div>';
     return;
   }
   S.hutang.forEach(function(h){
-    var el=document.createElement('div');
-    el.className='card';
+    var card=document.createElement('div');
+    card.style.cssText='background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; box-shadow:var(--card-shadow);';
     var tgl=h.tanggal?new Date(h.tanggal).toLocaleDateString('id-ID'):'';
-    el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-weight:700;font-size:14px">'+esc(h.nama)+'</div><div style="font-size:12px;color:var(--text-secondary)">'+esc(h.ket||'Hutang')+' • '+tgl+'</div></div><div style="font-family:Outfit;font-weight:800;font-size:16px;color:var(--red)">'+fR(h.jumlah)+'</div></div><div style="display:flex;gap:8px;margin-top:10px">'+(h.wa?'<a href="https://wa.me/'+h.wa+'?text='+encodeURIComponent('Halo '+h.nama+', ini pengingat hutang sebesar '+fR(h.jumlah)+'. Mohon segera dilunasi ya. Terima kasih!')+'" target="_blank" class="btn btn-g" style="height:32px;font-size:11px;flex:1;text-decoration:none">📲 WA Tagih</a>':'')+'<button class="btn" style="height:32px;font-size:11px;flex:1;background:var(--green)" onclick="lunasiHutang(\''+h.id+'\')">✓ Lunas</button></div>';
-    c.appendChild(el);
+    card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
+      '  <div>' +
+      '    <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(h.nama) + '</div>' +
+      '    <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">' + esc(h.ket||'Hutang') + ' • ' + tgl + '</div>' +
+      '  </div>' +
+      '  <div style="font-family:\'Outfit\',sans-serif;font-weight:800;font-size:14px;color:var(--red);">' + fR(h.jumlah) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;margin-top:10px">' +
+      '  ' + (h.wa ? '<a href="https://wa.me/'+h.wa+'?text='+encodeURIComponent('Halo '+h.nama+', ini pengingat hutang sebesar '+fR(h.jumlah)+'. Mohon segera dilunasi ya. Terima kasih!')+'" target="_blank" class="btn btn-g" style="height:30px;font-size:10px;flex:1;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">📲 WA Tagih</a>' : '') +
+      '  <button class="btn" style="height:30px;font-size:10px;flex:1;background:var(--green);" onclick="lunasiHutang(\''+h.id+'\')">✓ Lunas</button>' +
+      '</div>';
+    c.appendChild(card);
   });
 }
 
@@ -1960,8 +2702,8 @@ function shareCaptureImageWA(){
   var canvas = document.getElementById('capture-canvas');
   var dataUrl = canvas.toDataURL('image/png');
   var filename = (lastCaptureType === 'laporan' ? 'Laporan_Keuangan.png' : 'Buku_Hutang.png');
-  if(window.AndroidStorage && window.AndroidStorage.shareImage){
-    window.AndroidStorage.shareImage(dataUrl, filename);
+  if(typeof AndroidStorage !== 'undefined' && AndroidStorage.shareImage){
+    AndroidStorage.shareImage(dataUrl, filename);
   } else {
     canvas.toBlob(function(blob){
       var file = new File([blob], filename, {type: 'image/png'});
@@ -2126,6 +2868,361 @@ function hapusPengeluaran(id){
   }
 }
 
+/* ====== BERANDA DASHBOARD GRID MENU FUNCTIONS ====== */
+
+function renderKatalogList(){
+  var q = (document.getElementById('katalog-search') ? document.getElementById('katalog-search').value : '').toLowerCase();
+  var c = document.getElementById('katalog-list');
+  if(!c) return;
+  c.innerHTML = '';
+  var list = S.produk.filter(function(p){ return p.nama.toLowerCase().indexOf(q) !== -1; });
+  if(list.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Katalog kosong atau tidak ditemukan.</div>';
+    return;
+  }
+  list.forEach(function(p){
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    var img = p.foto ? '<img src="'+p.foto+'" style="width:36px;height:36px;border-radius:6px;object-fit:cover;">' : '<span style="font-size:24px;">📦</span>';
+    el.innerHTML = '<div style="display:flex;align-items:center;gap:10px;">' +
+      '  ' + img +
+      '  <div>' +
+      '    <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(p.nama) + '</div>' +
+      '    <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Beli: ' + fR(p.hargaHpp) + ' • Jual: ' + fR(p.hargaJual) + '</div>' +
+      '    <div style="font-size:10px;font-weight:700;color:var(--primary);margin-top:2px;">Stok: ' + (p.stok||0) + ' ' + esc(p.satuan) + '</div>' +
+      '  </div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;">' +
+      '  <button class="btn btn-s" style="width:30px;height:30px;padding:0;border-radius:6px;font-size:12px;" onclick="event.stopPropagation();closeSheet(\'sheet-katalog-produk\');openRestock(\''+p.id+'\')" title="Restock">📦</button>' +
+      '  <button class="btn" style="width:30px;height:30px;padding:0;border-radius:6px;font-size:12px;background:var(--primary);" onclick="event.stopPropagation();closeSheet(\'sheet-katalog-produk\');openProdukSheet(\''+p.id+'\')" title="Edit">✏️</button>' +
+      '</div>';
+    c.appendChild(el);
+  });
+}
+
+function renderRestockKatalogList(){
+  var c = document.getElementById('restock-katalog-list');
+  if(!c) return;
+  c.innerHTML = '';
+  if(S.produk.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Belum ada produk untuk direstock.</div>';
+    return;
+  }
+  S.produk.forEach(function(p){
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    el.onclick = function(){ closeSheet('sheet-restock-katalog'); openRestock(p.id); };
+    el.innerHTML = '<div>' +
+      '  <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(p.nama) + '</div>' +
+      '  <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Stok saat ini: ' + (p.stok||0) + ' ' + esc(p.satuan) + '</div>' +
+      '</div>' +
+      '<span style="color:var(--primary);font-weight:bold;font-size:12px;">+ Restock</span>';
+    c.appendChild(el);
+  });
+}
+
+function renderOpnameList(){
+  var c = document.getElementById('opname-list');
+  if(!c) return;
+  c.innerHTML = '';
+  if(S.produk.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Belum ada produk.</div>';
+    return;
+  }
+  S.produk.forEach(function(p){
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    el.innerHTML = '<div>' +
+      '  <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(p.nama) + '</div>' +
+      '  <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">Stok Sistem: ' + (p.stok||0) + ' ' + esc(p.satuan) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:6px;">' +
+      '  <input type="number" id="opname-input-'+p.id+'" value="'+(p.stok||0)+'" style="width:60px;height:32px;text-align:center;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:bold;">' +
+      '  <button class="btn" style="height:32px;padding:0 8px;font-size:11px;background:var(--primary);" onclick="simpanOpname(\''+p.id+'\')">Simpan</button>' +
+      '</div>';
+    c.appendChild(el);
+  });
+}
+
+function simpanOpname(id){
+  var input = document.getElementById('opname-input-'+id);
+  if(!input) return;
+  var newStok = Number(input.value || 0);
+  if(newStok < 0) { alert('Stok tidak boleh negatif!'); return; }
+  var p = S.produk.find(function(x){ return x.id === id; });
+  if(p){
+    var diff = newStok - (p.stok || 0);
+    p.stok = newStok;
+    if(!S.stockLogs) S.stockLogs = [];
+    S.stockLogs.unshift({
+      id: 'SL-' + Date.now(),
+      timestamp: new Date().toISOString(),
+      namaProduk: p.nama,
+      type: 'Stok Opname',
+      delta: diff,
+      sisa: p.stok
+    });
+    save();
+    renderOpnameList();
+    renderDashboard();
+    alert('Stok '+p.nama+' berhasil disesuaikan menjadi '+newStok+' '+p.satuan+'!');
+  }
+}
+
+function renderRiwayatStok(){
+  var c = document.getElementById('stok-log-list');
+  if(!c) return;
+  c.innerHTML = '';
+  if(!S.stockLogs || S.stockLogs.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Belum ada riwayat aktivitas stok.</div>';
+    return;
+  }
+  S.stockLogs.forEach(function(l){
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    var sign = l.delta > 0 ? '+' : '';
+    var color = l.delta > 0 ? 'var(--green)' : l.delta < 0 ? 'var(--red)' : 'var(--text-secondary)';
+    var tgl = l.timestamp ? new Date(l.timestamp).toLocaleString('id-ID', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'}) : '-';
+    el.innerHTML = '<div>' +
+      '  <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(l.namaProduk) + '</div>' +
+      '  <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">' + esc(l.type) + ' • ' + tgl + '</div>' +
+      '</div>' +
+      '<div style="text-align:right;">' +
+      '  <div style="font-weight:800;font-size:13px;color:'+color+'">'+sign+l.delta+'</div>' +
+      '  <div style="font-size:10px;color:var(--text-secondary);margin-top:1px;">Sisa: '+l.sisa+'</div>' +
+      '</div>';
+    c.appendChild(el);
+  });
+}
+
+function renderExpiredList(){
+  var c = document.getElementById('expired-list');
+  if(!c) return;
+  c.innerHTML = '';
+  var list = S.produk.filter(function(p){ return p.expiredDate && p.expiredDate !== ''; });
+  if(list.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Tidak ada produk dengan catatan expired date.</div>';
+    return;
+  }
+  
+  var sorted = list.slice().sort(function(a,b){ return new Date(a.expiredDate) - new Date(b.expiredDate); });
+  
+  sorted.forEach(function(p){
+    var expDate = new Date(p.expiredDate);
+    var now = new Date();
+    var diffTime = expDate - now;
+    var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    var statusText = '';
+    var statusColor = '';
+    if(diffDays < 0){
+      statusText = 'EXPIRED (' + Math.abs(diffDays) + ' hari yang lalu)';
+      statusColor = 'var(--red)';
+    } else if(diffDays <= 30){
+      statusText = 'Mendekati Expired (' + diffDays + ' hari lagi)';
+      statusColor = 'var(--red)';
+    } else {
+      statusText = 'Aman (' + diffDays + ' hari lagi)';
+      statusColor = 'var(--green)';
+    }
+    
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    var tglString = expDate.toLocaleDateString('id-ID');
+    el.innerHTML = '<div>' +
+      '  <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(p.nama) + '</div>' +
+      '  <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Tgl Expired: ' + tglString + '</div>' +
+      '  <div style="font-size:10px;font-weight:800;color:'+statusColor+';margin-top:4px;">'+statusText+'</div>' +
+      '</div>' +
+      '<button class="btn btn-s" style="height:32px;padding:0 8px;font-size:11px;background:var(--primary);" onclick="closeSheet(\'sheet-expired\');openProdukSheet(\''+p.id+'\')">Edit</button>';
+    c.appendChild(el);
+  });
+}
+
+function renderKategori(){
+  var c = document.getElementById('categories-container');
+  if(!c) return;
+  c.innerHTML = '';
+  if(!S.categories || S.categories.length === 0){
+    c.innerHTML = '<span style="font-size:11px;color:var(--text-secondary);">Belum ada kategori terdaftar.</span>';
+    return;
+  }
+  S.categories.forEach(function(cat){
+    var tag = document.createElement('span');
+    tag.style.cssText = 'background:#e8f7f0; color:var(--primary); font-size:11px; font-weight:700; padding:6px 12px; border-radius:20px; display:inline-flex; align-items:center; gap:6px; margin-bottom:4px;';
+    tag.innerHTML = esc(cat) + ' <span style="font-size:10px;color:var(--red);font-weight:bold;cursor:pointer;" onclick="hapusKategori(\''+esc(cat)+'\')">✕</span>';
+    c.appendChild(tag);
+  });
+}
+
+function tambahKategori(){
+  var val = document.getElementById('new-category-name').value.trim();
+  if(!val) return;
+  if(!S.categories) S.categories = [];
+  if(S.categories.indexOf(val) === -1) {
+    S.categories.push(val);
+    save();
+    document.getElementById('new-category-name').value = '';
+    renderKategori();
+  }
+}
+
+function hapusKategori(name){
+  if(confirm('Hapus kategori "'+name+'"?')){
+    S.categories = S.categories.filter(function(c){ return c !== name; });
+    save();
+    renderKategori();
+  }
+}
+
+function renderSatuan(){
+  var c = document.getElementById('units-container');
+  if(!c) return;
+  c.innerHTML = '';
+  if(!S.units || S.units.length === 0){
+    c.innerHTML = '<span style="font-size:11px;color:var(--text-secondary);">Belum ada satuan terdaftar.</span>';
+    return;
+  }
+  S.units.forEach(function(unit){
+    var tag = document.createElement('span');
+    tag.style.cssText = 'background:#eff6ff; color:#3b82f6; font-size:11px; font-weight:700; padding:6px 12px; border-radius:20px; display:inline-flex; align-items:center; gap:6px; margin-bottom:4px;';
+    tag.innerHTML = esc(unit) + ' <span style="font-size:10px;color:var(--red);font-weight:bold;cursor:pointer;" onclick="hapusSatuan(\''+esc(unit)+'\')">✕</span>';
+    c.appendChild(tag);
+  });
+}
+
+function tambahSatuan(){
+  var val = document.getElementById('new-unit-name').value.trim();
+  if(!val) return;
+  if(!S.units) S.units = [];
+  if(S.units.indexOf(val) === -1) {
+    S.units.push(val);
+    save();
+    document.getElementById('new-unit-name').value = '';
+    renderSatuan();
+  }
+}
+
+function hapusSatuan(name){
+  if(confirm('Hapus satuan "'+name+'"?')){
+    S.units = S.units.filter(function(u){ return u !== name; });
+    save();
+    renderSatuan();
+  }
+}
+
+var calcExpr = '';
+function pressCalc(k){
+  var scr = document.getElementById('calc-screen');
+  if(!scr) return;
+  if(k === 'C') {
+    calcExpr = '';
+    scr.textContent = '0';
+  } else if(k === 'del') {
+    calcExpr = calcExpr.slice(0, -1);
+    scr.textContent = calcExpr || '0';
+  } else if(k === '=') {
+    try {
+      if(calcExpr.trim() === '') { scr.textContent = '0'; return; }
+      var sanitized = calcExpr.replace(/[^0-9+\-*/.]/g, '');
+      var res = Function("return (" + sanitized + ")")();
+      scr.textContent = String(res);
+      calcExpr = String(res);
+    } catch(e) {
+      scr.textContent = 'Error';
+      calcExpr = '';
+    }
+  } else {
+    var last = calcExpr.slice(-1);
+    if(['+', '-', '*', '/'].indexOf(k) !== -1 && ['+', '-', '*', '/'].indexOf(last) !== -1) {
+      return;
+    }
+    calcExpr += k;
+    scr.textContent = calcExpr;
+  }
+}
+
+function renderCekHargaList(){
+  var q = (document.getElementById('check-price-search') ? document.getElementById('check-price-search').value : '').toLowerCase();
+  var c = document.getElementById('cek-harga-list');
+  if(!c) return;
+  c.innerHTML = '';
+  var list = S.produk.filter(function(p){ return p.nama.toLowerCase().indexOf(q) !== -1; });
+  if(list.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Barang tidak ditemukan.</div>';
+    return;
+  }
+  list.forEach(function(p){
+    var margin = p.hargaJual - p.hargaHpp;
+    var marginPercent = p.hargaHpp > 0 ? Math.round((margin / p.hargaHpp) * 100) : 0;
+    
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    el.innerHTML = '<div style="font-weight:800;font-size:14px;color:var(--text);">' + esc(p.nama) + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;font-size:12px;">' +
+      '  <div>Harga Jual: <span style="font-weight:700;color:var(--primary);">' + fR(p.hargaJual) + '</span></div>' +
+      '  <div>Harga Beli: <span style="font-weight:700;">' + fR(p.hargaHpp) + '</span></div>' +
+      '  <div>Keuntungan: <span style="font-weight:700;color:var(--green);">' + fR(margin) + ' ('+marginPercent+'%)</span></div>' +
+      '  <div>Stok Aktif: <span style="font-weight:700;">' + (p.stok||0) + ' ' + esc(p.satuan) + '</span></div>' +
+      '</div>';
+    c.appendChild(el);
+  });
+}
+
+function toggleSupplierForm(show){
+  var box = document.getElementById('supplier-form-box');
+  if(box) box.style.display = show ? 'flex' : 'none';
+}
+
+function openAddSupplierForm(){
+  document.getElementById('sup-nama').value = '';
+  document.getElementById('sup-wa').value = '';
+  document.getElementById('sup-alamat').value = '';
+  toggleSupplierForm(true);
+}
+
+function simpanSupplier(){
+  var nama = document.getElementById('sup-nama').value.trim();
+  var wa = document.getElementById('sup-wa').value.trim();
+  var alamat = document.getElementById('sup-alamat').value.trim();
+  if(!nama){ alert('Nama supplier wajib diisi!'); return; }
+  if(!S.suppliers) S.suppliers = [];
+  S.suppliers.push({ id: 'SUP-' + Date.now(), nama: nama, wa: wa, alamat: alamat });
+  save();
+  toggleSupplierForm(false);
+  renderSuppliersList();
+}
+
+function hapusSupplier(id){
+  if(confirm('Hapus data supplier ini?')){
+    S.suppliers = S.suppliers.filter(function(s){ return s.id !== id; });
+    save();
+    renderSuppliersList();
+  }
+}
+
+function renderSuppliersList(){
+  var c = document.getElementById('suppliers-list');
+  if(!c) return;
+  c.innerHTML = '';
+  if(!S.suppliers || S.suppliers.length === 0){
+    c.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:13px;border:1px dashed var(--border);border-radius:12px;">Belum ada data supplier.</div>';
+    return;
+  }
+  S.suppliers.forEach(function(s){
+    var el = document.createElement('div');
+    el.style.cssText = 'background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:flex-start; box-shadow:var(--card-shadow); margin-bottom:8px;';
+    var waLink = s.wa ? '<a href="https://wa.me/'+s.wa.replace(/[^0-9]/g,'')+'" target="_blank" style="text-decoration:none;font-size:11px;color:var(--primary);font-weight:bold;margin-top:6px;display:inline-block;">📲 Hubungi WA</a>' : '';
+    el.innerHTML = '<div>' +
+      '  <div style="font-weight:700;font-size:13px;color:var(--text);">' + esc(s.nama) + '</div>' +
+      '  <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">Alamat: ' + esc(s.alamat || '-') + '</div>' +
+      '  ' + waLink +
+      '</div>' +
+      '<button class="btn btn-s" style="width:28px;height:28px;padding:0;background:var(--red);color:#fff;border:none;border-radius:6px;font-size:11px;" onclick="hapusSupplier(\''+s.id+'\')">✕</button>';
+    c.appendChild(el);
+  });
+}
+
 /* ====== PENGATURAN VIEW PRELOAD ====== */
 document.addEventListener('DOMContentLoaded',function(){
   // preload profil fields when opening sheet-profile
@@ -2151,6 +3248,38 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     if(id==='sheet-pengeluaran'){
       renderPengeluaranList();
+    }
+    if(id==='sheet-katalog-produk'){
+      document.getElementById('katalog-search').value='';
+      renderKatalogList();
+    }
+    if(id==='sheet-restock-katalog'){
+      renderRestockKatalogList();
+    }
+    if(id==='sheet-stok-opname'){
+      renderOpnameList();
+    }
+    if(id==='sheet-riwayat-stok'){
+      renderRiwayatStok();
+    }
+    if(id==='sheet-expired'){
+      renderExpiredList();
+    }
+    if(id==='sheet-kategori'){
+      document.getElementById('new-category-name').value='';
+      renderKategori();
+    }
+    if(id==='sheet-satuan'){
+      document.getElementById('new-unit-name').value='';
+      renderSatuan();
+    }
+    if(id==='sheet-cek-harga'){
+      document.getElementById('check-price-search').value='';
+      renderCekHargaList();
+    }
+    if(id==='sheet-supplier'){
+      toggleSupplierForm(false);
+      renderSuppliersList();
     }
     origOpen(id);
   };
