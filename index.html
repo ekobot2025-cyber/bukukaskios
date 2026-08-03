@@ -152,19 +152,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
       </button>
-      <!-- Gear settings icon that triggers profile settings -->
-      <button class="ib" style="background:none;color:#334155;width:34px;height:34px;" onclick="openSheet('sheet-profile')" title="Pengaturan Toko">
+      <!-- Gear settings icon that triggers Pengaturan Tab -->
+      <button class="ib" style="background:none;color:#334155;width:34px;height:34px;" onclick="switchTab('pengaturan')" title="Pengaturan Toko">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-      </button>
-      <!-- Menu icon (Hamburger) that opens settings tab -->
-      <button class="ib" style="background:none;color:#334155;width:34px;height:34px;" onclick="switchTab('pengaturan')" title="Menu Pengaturan">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
     </div>
@@ -230,6 +222,46 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <button class="fchip" onclick="setLaporanFilter('30d',this)">30 Hari</button>
       </div>
       <button class="btn btn-o" style="height:42px;font-size:13px;margin-bottom:12px;box-shadow:0 4px 10px rgba(245,158,11,.2);" onclick="openSheet('sheet-pengeluaran')">💸 Catat Pengeluaran Kios (Beban)</button>
+
+      <!-- RINGKASAN KEUANGAN DASHBOARD -->
+      <div style="font-family:'Outfit';font-weight:700;font-size:14px;color:#64748b;text-transform:uppercase;margin: 8px 0 10px 0;letter-spacing:0.5px;">Ringkasan Keuangan</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <!-- Card 1: Total Penjualan -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-penjualan">Rp 0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Total Penjualan</div>
+        </div>
+
+        <!-- Card 2: Total Transaksi -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#f0fdf4;color:#16a34a;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-transaksi">0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Total Transaksi</div>
+        </div>
+
+        <!-- Card 3: Barang Terjual -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#fff7ed;color:#ea580c;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-terjual">0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Barang Terjual</div>
+        </div>
+
+        <!-- Card 4: Laba Bersih -->
+        <div class="card" style="margin-bottom:0;padding:14px;display:flex;flex-direction:column;gap:6px;border-radius:14px;box-shadow:var(--card-shadow);">
+          <div style="width:32px;height:32px;border-radius:8px;background:#ecfeff;color:#0891b2;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#1e293b;margin-top:4px;" id="dash-laba">Rp 0</div>
+          <div style="font-size:11px;color:#64748b;font-weight:600;">Laba Bersih</div>
+        </div>
+      </div>
 
       <!-- LAPORAN LABA RUGI -->
       <div class="card" style="margin-bottom:12px">
@@ -1344,6 +1376,12 @@ function getLaporanData(){
   var kasAwal=0;
   var kasAkhir=kasAwal+kasDelta;
 
+  // Metrics for dashboard
+  var totalTransaksi=filtered.length;
+  var barangTerjual=filtered.reduce(function(s,tx){
+    return s+(tx.items||[]).reduce(function(si,it){return si+it.qty},0);
+  },0);
+
   var periodeLabel=laporanFilter==='all'?'Semua Waktu':laporanFilter==='today'?'Hari Ini':laporanFilter==='7d'?'7 Hari Terakhir':'30 Hari Terakhir';
   var tglNow=new Date().toLocaleDateString('id-ID');
 
@@ -1352,7 +1390,8 @@ function getLaporanData(){
     beban:beban, labaBersih:labaBersih, totalPiutang:totalPiutang, totalHutangUsaha:totalHutangUsaha,
     modalAwal:modalAwal, persediaan:persediaan, kas:kas, totalAktiva:totalAktiva, totalPasiva:totalPasiva,
     kasOperasi:kasOperasi, kasRestock:kasRestock, kasInvestasi:kasInvestasi, kasPendanaan:kasPendanaan,
-    kasDelta:kasDelta, kasAwal:kasAwal, kasAkhir:kasAkhir, periodeLabel:periodeLabel, tglNow:tglNow
+    kasDelta:kasDelta, kasAwal:kasAwal, kasAkhir:kasAkhir, periodeLabel:periodeLabel, tglNow:tglNow,
+    totalTransaksi:totalTransaksi, barangTerjual:barangTerjual
   };
 }
 
@@ -1372,6 +1411,22 @@ function renderLaporan(){
 
   var elPeriode=document.getElementById('lap-periode');
   if(elPeriode) elPeriode.textContent='Periode: '+d.periodeLabel+' (Hingga '+d.tglNow+')';
+
+  // Dashboard Summary
+  setText('dash-penjualan', fR(d.pendapatan));
+  setText('dash-transaksi', d.totalTransaksi);
+  setText('dash-terjual', d.barangTerjual);
+  setText('dash-laba', fRn(d.labaBersih));
+  
+  // Style laba bersih positive/negative indicator
+  var labaEl=document.getElementById('dash-laba');
+  if(labaEl){
+    if(d.labaBersih<0){
+      labaEl.style.color='var(--red)';
+    } else {
+      labaEl.style.color='#0891b2'; // cyan/primary
+    }
+  }
 
   // Laba Rugi
   setText('lap-pendapatan', fR(d.pendapatan));
